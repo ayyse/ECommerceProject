@@ -3,6 +3,7 @@ using Abp.Zero.EntityFrameworkCore;
 using eCommerceProject.Authorization.Roles;
 using eCommerceProject.Authorization.Users;
 using eCommerceProject.MultiTenancy;
+using eCommerceApp.Products;
 
 namespace eCommerceProject.EntityFrameworkCore
 {
@@ -14,5 +15,9 @@ namespace eCommerceProject.EntityFrameworkCore
             : base(options)
         {
         }
+
+        public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<ProductBrand> ProductBrands { get; set; }
+        public virtual DbSet<ProductType> ProductTypes { get; set; }
     }
 }
