@@ -30,8 +30,9 @@ export class ProductComponent implements OnInit {
     })
   }
 
-  deleteProduct(id : number){
-    this.productService.delete(id).subscribe(() => {
+  deleteProduct(product : ProductDto){
+    this.productService.delete(product.id).subscribe(() => {
+      this.products.slice(product.id)
       this.getAllProducts()
     })
   }
@@ -40,21 +41,21 @@ export class ProductComponent implements OnInit {
     this.showCreateOrEditProductModal();
   }
 
-  editProductModal(tenant: ProductDto): void {
-    this.showCreateOrEditProductModal(tenant.id);
+  editProductModal(product: ProductDto): void {
+    this.showCreateOrEditProductModal(product.id);
   }
 
   showCreateOrEditProductModal(id?: number): void {
-    let createOrEditTenantDialog: BsModalRef;
+    let createOrEditProductModal: BsModalRef;
     if (!id) {
-      createOrEditTenantDialog = this._modalService.show(
+      createOrEditProductModal = this._modalService.show(
         CreateProductComponent,
         {
           class: 'modal-lg',
         }
       );
     } else {
-      createOrEditTenantDialog = this._modalService.show(
+      createOrEditProductModal = this._modalService.show(
         EditProductComponent,
         {
           class: 'modal-lg',
@@ -65,7 +66,7 @@ export class ProductComponent implements OnInit {
       );
     }
 
-    createOrEditTenantDialog.content.onSave.subscribe(() => {
+    createOrEditProductModal.content.onSave.subscribe(() => {
       this.getAllProducts();
     });
   }
