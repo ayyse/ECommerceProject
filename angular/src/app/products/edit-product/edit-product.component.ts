@@ -1,19 +1,19 @@
+import { ProductServiceProxy } from './../../../shared/service-proxies/service-proxies';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ProductDto, ProductServiceProxy } from '@shared/service-proxies/service-proxies';
+import { ProductDto } from '@shared/service-proxies/service-proxies';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { finalize } from 'rxjs/operators';
 
-
 @Component({
-  selector: 'app-create-product',
-  templateUrl: './create-product.component.html',
-  styleUrls: ['./create-product.component.css']
+  selector: 'app-edit-product',
+  templateUrl: './edit-product.component.html',
+  styleUrls: ['./edit-product.component.css']
 })
-export class CreateProductComponent implements OnInit {
+export class EditProductComponent implements OnInit {
 
   saving = false;
   product: ProductDto = new ProductDto();
+  id: number;
 
   @Output() onSave = new EventEmitter<any>();
 
@@ -23,13 +23,16 @@ export class CreateProductComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.productService.get(this.id).subscribe((result: ProductDto) => {
+      this.product = result;
+    });
   }
 
   save(): void {
     this.saving = true;
 
     this.productService
-      .create(this.product)
+      .update(this.product)
       .pipe(
         finalize(() => {
           this.saving = false;

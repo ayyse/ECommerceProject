@@ -31,6 +31,8 @@ namespace eCommerceApp.Products
         public override async Task<ProductDto> CreateAsync(ProductDto input)
         {
             var product = _mapper.Map<Product>(input);
+            product.ProductTypeId = 1;
+            product.ProductBrandId = 1;
             var createdProduct = await _productRepository.InsertAsync(product);
             await CurrentUnitOfWork.SaveChangesAsync();
             return _mapper.Map<ProductDto>(createdProduct);
@@ -52,17 +54,8 @@ namespace eCommerceApp.Products
 
         public async Task<List<ProductDto>> getAllProductsAsync()
         {
-            try
-            {
-                var productList = await _productRepository.GetAll().ToListAsync();
-                return _mapper.Map<List<ProductDto>>(productList);
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
-            return null;
+            var productList = await _productRepository.GetAll().ToListAsync();
+            return _mapper.Map<List<ProductDto>>(productList);
         }
 
         public async Task<ProductDto> GetProductAsync(ProductDto input)

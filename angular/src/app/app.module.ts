@@ -40,6 +40,7 @@ import { SidebarUserPanelComponent } from './layout/sidebar-user-panel.component
 import { SidebarMenuComponent } from './layout/sidebar-menu.component';
 import { ProductComponent } from './products/product/product.component';
 import { CreateProductComponent } from './products/create-product/create-product.component';
+import { EditProductComponent } from './products/edit-product/edit-product.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { CreateProductComponent } from './products/create-product/create-product
     SidebarUserPanelComponent,
     SidebarMenuComponent,
     ProductComponent,
-    CreateProductComponent
+    CreateProductComponent,
+    EditProductComponent
   ],
   imports: [
     CommonModule,

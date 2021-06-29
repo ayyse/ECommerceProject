@@ -4,7 +4,7 @@
             <div class="col-6 ng-tns-c86-8">
                 <h1 class="ng-tns-c86-8">Ürünler</h1>
             </div><div class="col-6 text-right ng-tns-c86-8">
-                <a href="javascript:;" class="btn bg-blue ng-tns-c86-8"><i class="fa fa-plus-square ng-tns-c86-8"></i> Oluştur </a>
+                <a href="javascript:;" class="btn bg-blue ng-tns-c86-8" (click)="createProductModal()"><i class="fa fa-plus-square ng-tns-c86-8"></i> Oluştur </a>
             </div>
         </div>
     </div>
@@ -55,7 +55,7 @@
                                 <td class="ng-tns-c83-2">{{ product?.price }}</td>
                                 <td class="ng-tns-c83-2">{{ product?.shipmentPrice }}</td>
                                 <td class="ng-tns-c83-2">
-                                    <button (click)="updateProduct(product)" type="button" class="btn btn-sm bg-secondary ng-tns-c83-2"><i class="fas fa-pencil-alt ng-tns-c83-2"></i> Düzenle </button>
+                                    <button (click)="editProductModal(product)" type="button" class="btn btn-sm bg-secondary ng-tns-c83-2"><i class="fas fa-pencil-alt ng-tns-c83-2"></i> Düzenle </button>
                                     <button (click)="deleteProduct(product.id)" type="button" class="btn btn-sm bg-danger mx-2 ng-tns-c83-2" ><i class="fas fa-trash ng-tns-c83-2"></i> Sil </button>
                                     <!-- <button type="button" class="btn btn-sm bg-secondary ng-tns-c83-2"><i class="fa-solid fa-circle-info"></i> Detay </button> -->
                                 </td>
