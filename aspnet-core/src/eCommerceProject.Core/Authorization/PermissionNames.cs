@@ -10,7 +10,5 @@
         public const string Pages_Roles = "Pages.Roles";
 
         public const string Pages_Products = "Pages.Produts";
-
-        public const string Pages_ProductBrands = "Pages.ProdutBrands";
     }
 }
