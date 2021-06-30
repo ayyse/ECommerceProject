@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eCommerceProject.EntityFrameworkCore;
 
 namespace eCommerceProject.Migrations
 {
     [DbContext(typeof(eCommerceProjectDbContext))]
-    partial class eCommerceProjectDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210630104205_Delete_Brand_and_Type_Tables")]
+    partial class Delete_Brand_and_Type_Tables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1333,6 +1335,9 @@ namespace eCommerceProject.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<string>("BrandName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Color")
                         .HasColumnType("nvarchar(max)");
 
@@ -1348,26 +1353,13 @@ namespace eCommerceProject.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("ProductBrandId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ProductBrandName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ProductTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ProductTypeName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<decimal>("ShipmentPrice")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<string>("TypeName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
-
-                    b.HasIndex("ProductBrandId");
-
-                    b.HasIndex("ProductTypeId");
 
                     b.ToTable("Products");
                 });
@@ -1636,36 +1628,6 @@ namespace eCommerceProject.Migrations
                     b.ToTable("AbpTenants");
                 });
 
-            modelBuilder.Entity("eCommerceProject.ProductBrands.ProductBrand", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ProductBrands");
-                });
-
-            modelBuilder.Entity("eCommerceProject.ProductTypes.ProductType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ProductTypes");
-                });
-
             modelBuilder.Entity("Abp.Application.Features.EditionFeatureSetting", b =>
                 {
                     b.HasBaseType("Abp.Application.Features.FeatureSetting");
@@ -1840,25 +1802,6 @@ namespace eCommerceProject.Migrations
                         .IsRequired();
 
                     b.Navigation("WebhookEvent");
-                });
-
-            modelBuilder.Entity("eCommerceApp.Products.Product", b =>
-                {
-                    b.HasOne("eCommerceProject.ProductBrands.ProductBrand", "ProductBrand")
-                        .WithMany()
-                        .HasForeignKey("ProductBrandId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("eCommerceProject.ProductTypes.ProductType", "ProductType")
-                        .WithMany()
-                        .HasForeignKey("ProductTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ProductBrand");
-
-                    b.Navigation("ProductType");
                 });
 
             modelBuilder.Entity("eCommerceProject.Authorization.Roles.Role", b =>

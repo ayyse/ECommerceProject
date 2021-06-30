@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eCommerceProject.EntityFrameworkCore;
 
 namespace eCommerceProject.Migrations
 {
     [DbContext(typeof(eCommerceProjectDbContext))]
-    partial class eCommerceProjectDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210630085756_Update_Product_Table_2")]
+    partial class Update_Product_Table_2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1351,14 +1353,8 @@ namespace eCommerceProject.Migrations
                     b.Property<int>("ProductBrandId")
                         .HasColumnType("int");
 
-                    b.Property<string>("ProductBrandName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("ProductTypeId")
                         .HasColumnType("int");
-
-                    b.Property<string>("ProductTypeName")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("ShipmentPrice")
                         .HasColumnType("decimal(18,2)");
@@ -1370,6 +1366,36 @@ namespace eCommerceProject.Migrations
                     b.HasIndex("ProductTypeId");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("eCommerceApp.Products.ProductBrand", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProductBrands");
+                });
+
+            modelBuilder.Entity("eCommerceApp.Products.ProductType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProductTypes");
                 });
 
             modelBuilder.Entity("eCommerceProject.Authorization.Roles.Role", b =>
@@ -1636,36 +1662,6 @@ namespace eCommerceProject.Migrations
                     b.ToTable("AbpTenants");
                 });
 
-            modelBuilder.Entity("eCommerceProject.ProductBrands.ProductBrand", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ProductBrands");
-                });
-
-            modelBuilder.Entity("eCommerceProject.ProductTypes.ProductType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ProductTypes");
-                });
-
             modelBuilder.Entity("Abp.Application.Features.EditionFeatureSetting", b =>
                 {
                     b.HasBaseType("Abp.Application.Features.FeatureSetting");
@@ -1844,14 +1840,14 @@ namespace eCommerceProject.Migrations
 
             modelBuilder.Entity("eCommerceApp.Products.Product", b =>
                 {
-                    b.HasOne("eCommerceProject.ProductBrands.ProductBrand", "ProductBrand")
-                        .WithMany()
+                    b.HasOne("eCommerceApp.Products.ProductBrand", "ProductBrand")
+                        .WithMany("Products")
                         .HasForeignKey("ProductBrandId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("eCommerceProject.ProductTypes.ProductType", "ProductType")
-                        .WithMany()
+                    b.HasOne("eCommerceApp.Products.ProductType", "ProductType")
+                        .WithMany("Products")
                         .HasForeignKey("ProductTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1977,6 +1973,16 @@ namespace eCommerceProject.Migrations
             modelBuilder.Entity("Abp.Organizations.OrganizationUnit", b =>
                 {
                     b.Navigation("Children");
+                });
+
+            modelBuilder.Entity("eCommerceApp.Products.ProductBrand", b =>
+                {
+                    b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("eCommerceApp.Products.ProductType", b =>
+                {
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("eCommerceProject.Authorization.Roles.Role", b =>

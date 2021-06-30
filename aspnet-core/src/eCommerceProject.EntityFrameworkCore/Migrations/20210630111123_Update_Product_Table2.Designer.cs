@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eCommerceProject.EntityFrameworkCore;
 
 namespace eCommerceProject.Migrations
 {
     [DbContext(typeof(eCommerceProjectDbContext))]
-    partial class eCommerceProjectDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210630111123_Update_Product_Table2")]
+    partial class Update_Product_Table2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1351,14 +1353,8 @@ namespace eCommerceProject.Migrations
                     b.Property<int>("ProductBrandId")
                         .HasColumnType("int");
 
-                    b.Property<string>("ProductBrandName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("ProductTypeId")
                         .HasColumnType("int");
-
-                    b.Property<string>("ProductTypeName")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("ShipmentPrice")
                         .HasColumnType("decimal(18,2)");

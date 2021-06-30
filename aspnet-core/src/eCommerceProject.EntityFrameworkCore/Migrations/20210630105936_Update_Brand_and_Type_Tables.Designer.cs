@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eCommerceProject.EntityFrameworkCore;
 
 namespace eCommerceProject.Migrations
 {
     [DbContext(typeof(eCommerceProjectDbContext))]
-    partial class eCommerceProjectDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210630105936_Update_Brand_and_Type_Tables")]
+    partial class Update_Brand_and_Type_Tables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1333,6 +1335,9 @@ namespace eCommerceProject.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<string>("BrandId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Color")
                         .HasColumnType("nvarchar(max)");
 
@@ -1348,20 +1353,17 @@ namespace eCommerceProject.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("ProductBrandId")
+                    b.Property<int?>("ProductBrandId")
                         .HasColumnType("int");
 
-                    b.Property<string>("ProductBrandName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ProductTypeId")
+                    b.Property<int?>("ProductTypeId")
                         .HasColumnType("int");
-
-                    b.Property<string>("ProductTypeName")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("ShipmentPrice")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("TypeId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -1846,15 +1848,11 @@ namespace eCommerceProject.Migrations
                 {
                     b.HasOne("eCommerceProject.ProductBrands.ProductBrand", "ProductBrand")
                         .WithMany()
-                        .HasForeignKey("ProductBrandId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProductBrandId");
 
                     b.HasOne("eCommerceProject.ProductTypes.ProductType", "ProductType")
                         .WithMany()
-                        .HasForeignKey("ProductTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProductTypeId");
 
                     b.Navigation("ProductBrand");
 

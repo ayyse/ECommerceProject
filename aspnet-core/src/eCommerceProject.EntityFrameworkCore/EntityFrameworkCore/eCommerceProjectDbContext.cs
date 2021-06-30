@@ -4,6 +4,8 @@ using eCommerceProject.Authorization.Roles;
 using eCommerceProject.Authorization.Users;
 using eCommerceProject.MultiTenancy;
 using eCommerceApp.Products;
+using eCommerceProject.ProductBrands;
+using eCommerceProject.ProductTypes;
 
 namespace eCommerceProject.EntityFrameworkCore
 {
