@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eCommerceProject.EntityFrameworkCore;
 
 namespace eCommerceProject.Migrations
 {
     [DbContext(typeof(eCommerceProjectDbContext))]
-    partial class eCommerceProjectDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210701151103_Updated_Product_Table")]
+    partial class Updated_Product_Table
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

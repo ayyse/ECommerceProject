@@ -5,14 +5,12 @@ namespace eCommerceProject.Products
     public class Product : Entity<int>
     {
         public int ProductTypeId { get; set; }
-        public string TypeName { get; set; }
-        public ProductType ProductType { get; set; }
+        public ProductType ProductTypeFk { get; set; }
         
 
 
         public int ProductBrandId { get; set; }
-        public string BrandName { get; set; }
-        public ProductBrand ProductBrand { get; set; }
+        public ProductBrand ProductBrandFk { get; set; }
 
 
         public string Name { get; set; }
