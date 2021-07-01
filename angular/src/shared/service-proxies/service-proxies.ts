@@ -439,9 +439,9 @@ export class ProductServiceProxy {
 
     /**
      * @param productTypeId (optional) 
-     * @param productTypeName (optional) 
+     * @param typeName (optional) 
      * @param productBrandId (optional) 
-     * @param productBrandName (optional) 
+     * @param brandName (optional) 
      * @param name (optional) 
      * @param description (optional) 
      * @param imageUrl (optional) 
@@ -451,20 +451,20 @@ export class ProductServiceProxy {
      * @param id (optional) 
      * @return Success
      */
-    getProduct(productTypeId: number | undefined, productTypeName: string | null | undefined, productBrandId: number | undefined, productBrandName: string | null | undefined, name: string | null | undefined, description: string | null | undefined, imageUrl: string | null | undefined, color: string | null | undefined, price: number | undefined, shipmentPrice: number | undefined, id: number | undefined): Observable<ProductDto> {
+    getProduct(productTypeId: number | undefined, typeName: string | null | undefined, productBrandId: number | undefined, brandName: string | null | undefined, name: string | null | undefined, description: string | null | undefined, imageUrl: string | null | undefined, color: string | null | undefined, price: number | undefined, shipmentPrice: number | undefined, id: number | undefined): Observable<ProductDto> {
         let url_ = this.baseUrl + "/api/services/app/Product/GetProduct?";
         if (productTypeId === null)
             throw new Error("The parameter 'productTypeId' cannot be null.");
         else if (productTypeId !== undefined)
             url_ += "ProductTypeId=" + encodeURIComponent("" + productTypeId) + "&";
-        if (productTypeName !== undefined && productTypeName !== null)
-            url_ += "ProductTypeName=" + encodeURIComponent("" + productTypeName) + "&";
+        if (typeName !== undefined && typeName !== null)
+            url_ += "TypeName=" + encodeURIComponent("" + typeName) + "&";
         if (productBrandId === null)
             throw new Error("The parameter 'productBrandId' cannot be null.");
         else if (productBrandId !== undefined)
             url_ += "ProductBrandId=" + encodeURIComponent("" + productBrandId) + "&";
-        if (productBrandName !== undefined && productBrandName !== null)
-            url_ += "ProductBrandName=" + encodeURIComponent("" + productBrandName) + "&";
+        if (brandName !== undefined && brandName !== null)
+            url_ += "BrandName=" + encodeURIComponent("" + brandName) + "&";
         if (name !== undefined && name !== null)
             url_ += "Name=" + encodeURIComponent("" + name) + "&";
         if (description !== undefined && description !== null)
@@ -2644,9 +2644,9 @@ export interface IChangeUiThemeInput {
 
 export class ProductDto implements IProductDto {
     productTypeId: number;
-    productTypeName: string | undefined;
+    typeName: string | undefined;
     productBrandId: number;
-    productBrandName: string | undefined;
+    brandName: string | undefined;
     name: string | undefined;
     description: string | undefined;
     imageUrl: string | undefined;
@@ -2667,9 +2667,9 @@ export class ProductDto implements IProductDto {
     init(_data?: any) {
         if (_data) {
             this.productTypeId = _data["productTypeId"];
-            this.productTypeName = _data["productTypeName"];
+            this.typeName = _data["typeName"];
             this.productBrandId = _data["productBrandId"];
-            this.productBrandName = _data["productBrandName"];
+            this.brandName = _data["brandName"];
             this.name = _data["name"];
             this.description = _data["description"];
             this.imageUrl = _data["imageUrl"];
@@ -2690,9 +2690,9 @@ export class ProductDto implements IProductDto {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["productTypeId"] = this.productTypeId;
-        data["productTypeName"] = this.productTypeName;
+        data["typeName"] = this.typeName;
         data["productBrandId"] = this.productBrandId;
-        data["productBrandName"] = this.productBrandName;
+        data["brandName"] = this.brandName;
         data["name"] = this.name;
         data["description"] = this.description;
         data["imageUrl"] = this.imageUrl;
@@ -2713,9 +2713,9 @@ export class ProductDto implements IProductDto {
 
 export interface IProductDto {
     productTypeId: number;
-    productTypeName: string | undefined;
+    typeName: string | undefined;
     productBrandId: number;
-    productBrandName: string | undefined;
+    brandName: string | undefined;
     name: string | undefined;
     description: string | undefined;
     imageUrl: string | undefined;

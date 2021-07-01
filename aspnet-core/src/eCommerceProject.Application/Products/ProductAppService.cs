@@ -3,10 +3,9 @@ using Abp.Application.Services.Dto;
 using Abp.Authorization;
 using Abp.Domain.Repositories;
 using Abp.ObjectMapping;
-using eCommerceApp.ProductBrands.Dto;
-using eCommerceApp.Products.Dto;
-using eCommerceApp.ProductTypes.Dto;
 using eCommerceProject.Authorization;
+using eCommerceProject.Products;
+using eCommerceProject.Products.Dto;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -14,7 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace eCommerceApp.Products
+namespace eCommerceProject.Products
 {
     [AbpAuthorize(PermissionNames.Pages_Products)]
     public class ProductAppService : AsyncCrudAppService<Product, ProductDto, int>, IProductAppService
@@ -31,8 +30,6 @@ namespace eCommerceApp.Products
         public override async Task<ProductDto> CreateAsync(ProductDto input)
         {
             var product = _mapper.Map<Product>(input);
-            product.ProductTypeId = 1;
-            product.ProductBrandId = 1;
             var createdProduct = await _productRepository.InsertAsync(product);
             await CurrentUnitOfWork.SaveChangesAsync();
             return _mapper.Map<ProductDto>(createdProduct);
@@ -66,7 +63,7 @@ namespace eCommerceApp.Products
 
         public async Task<List<ProductDto>> getAllProductsByBrandAsync(int brandId)
         {
-            var productsByBrand =  await _productRepository.GetAll().Where(x => x.ProductBrandId == brandId).ToListAsync();
+            var productsByBrand = await _productRepository.GetAll().Where(x => x.ProductBrandId == brandId).ToListAsync();
             return _mapper.Map<List<ProductDto>>(productsByBrand);
         }
 

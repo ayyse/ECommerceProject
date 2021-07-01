@@ -1,9 +1,8 @@
+
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProductDto, ProductServiceProxy } from '@shared/service-proxies/service-proxies';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { finalize } from 'rxjs/operators';
-
 
 @Component({
   selector: 'app-create-product',
@@ -13,9 +12,10 @@ import { finalize } from 'rxjs/operators';
 export class CreateProductComponent implements OnInit {
 
   saving = false;
-  product: ProductDto = new ProductDto();
+  product: ProductDto = new ProductDto()
+  products: ProductDto[] = []
 
-  @Output() onSave = new EventEmitter<any>();
+  @Output() onSave = new EventEmitter<any>()
 
   constructor(
     public productService: ProductServiceProxy,

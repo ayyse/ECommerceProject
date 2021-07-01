@@ -33,7 +33,7 @@ autocomplete="off"
       </div>
       <div class="form-group row required">
           <label class="col-md-3 col-form-label" for="description">
-            {{ "TenancyName" | localize }}
+            {{ "Description" | localize }}
           </label>
           <div class="col-md-9">
             <input
@@ -81,8 +81,8 @@ autocomplete="off"
             <input
               type="number"
               class="form-control"
-              name="tenancyName"
-              id="tenancyName"
+              name="price"
+              id="price"
               required
               [(ngModel)]="product.price"
               #priceModel="ngModel"

@@ -1,8 +1,8 @@
 import { EditProductComponent } from './../edit-product/edit-product.component';
 import { CreateProductComponent } from './../create-product/create-product.component';
 import { Component, OnInit } from '@angular/core';
-import { ProductDto, ProductServiceProxy } from '@shared/service-proxies/service-proxies';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { ProductDto, ProductServiceProxy } from '@shared/service-proxies/service-proxies';
 
 @Component({
   selector: 'app-product',
@@ -30,6 +30,18 @@ export class ProductComponent implements OnInit {
     })
   }
 
+  getAllProductsByBrandId(brandId: number){
+    this.productService.getAllProductsByBrand(brandId).subscribe(response => {
+      this.products = response
+    })
+  }
+
+  getAllProductsByTypeId(typeId: number){
+    this.productService.getAllProductsByType(typeId).subscribe(response => {
+      this.products = response
+    })
+  }
+
   deleteProduct(product : ProductDto){
     this.productService.delete(product.id).subscribe(() => {
       this.products.slice(product.id)
@@ -41,8 +53,8 @@ export class ProductComponent implements OnInit {
     this.showCreateOrEditProductModal();
   }
 
-  editProductModal(product: ProductDto): void {
-    this.showCreateOrEditProductModal(product.id);
+  editProductModal(): void {
+    this.showCreateOrEditProductModal(this.product.id);
   }
 
   showCreateOrEditProductModal(id?: number): void {

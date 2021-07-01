@@ -1,6 +1,6 @@
-import { ProductServiceProxy } from './../../../shared/service-proxies/service-proxies';
+
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { ProductDto } from '@shared/service-proxies/service-proxies';
+import { ProductDto, ProductServiceProxy } from '@shared/service-proxies/service-proxies';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { finalize } from 'rxjs/operators';
 

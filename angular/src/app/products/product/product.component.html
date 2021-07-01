@@ -10,7 +10,15 @@
     </div>
 </section>
 
-<section class="content px-2 ng-tns-c83-2">
+<nav class="navbar navbar-expand-sm bg-primary navbar-dark" style="margin: 15px; margin-top: 0px; border-radius: 5px;">
+    <ul class="navbar-nav">
+      <li class="nav-item" *ngFor="let product of products" style="margin-left: 5px;">
+        <a class="nav-link">{{ product?.productBrandName}}</a>
+      </li>
+    </ul>
+</nav>
+
+  <section class="content px-2 ng-tns-c83-2">
     <div class="container-fluid ng-tns-c83-2">
         <div class="card ng-tns-c83-2">
             <div class="card-header ng-tns-c83-3">
