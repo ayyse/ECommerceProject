@@ -36,5 +36,27 @@ namespace eCommerceProject.ProductBrands
             var brand = await _brandRepository.FirstOrDefaultAsync(x => x.Id == input.Id);
             return _mapper.Map<ProductBrandDto>(brand);
         }
+
+        public override async Task<ProductBrandDto> CreateAsync(ProductBrandDto input)
+        {
+            var brand = _mapper.Map<ProductBrand>(input);
+            var createdBrand = await _brandRepository.InsertAsync(brand);
+            await CurrentUnitOfWork.SaveChangesAsync();
+            return _mapper.Map<ProductBrandDto>(createdBrand);
+        }
+
+        public override async Task<ProductBrandDto> UpdateAsync(ProductBrandDto input)
+        {
+            var brand = _mapper.Map<ProductBrand>(input);
+            var updatedBrand = await _brandRepository.UpdateAsync(brand);
+            await CurrentUnitOfWork.SaveChangesAsync();
+            return _mapper.Map<ProductBrandDto>(updatedBrand);
+        }
+
+        public override async Task DeleteAsync(EntityDto<int> input)
+        {
+            var deletedBrand = await _brandRepository.FirstOrDefaultAsync(x => x.Id == input.Id);
+            await _brandRepository.DeleteAsync(deletedBrand);
+        }
     }
 }

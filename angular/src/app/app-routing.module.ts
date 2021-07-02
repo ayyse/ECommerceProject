@@ -1,3 +1,4 @@
+import { TypeComponent } from './productTypes/type/type.component';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
@@ -9,6 +10,7 @@ import { TenantsComponent } from './tenants/tenants.component';
 import { RolesComponent } from 'app/roles/roles.component';
 import { ChangePasswordComponent } from './users/change-password/change-password.component';
 import { ProductComponent } from './products/product/product.component';
+import { BrandComponent } from './productBrands/brand/brand.component';
 
 @NgModule({
     imports: [
@@ -19,6 +21,8 @@ import { ProductComponent } from './products/product/product.component';
                 children: [
                     { path: 'home', component: HomeComponent,  canActivate: [AppRouteGuard] },
                     { path: 'products', component: ProductComponent, canActivate: [AppRouteGuard] },
+                    { path: 'brands', component: BrandComponent, canActivate: [AppRouteGuard] },
+                    { path: 'types', component: TypeComponent, canActivate: [AppRouteGuard] },
                     { path: 'users', component: UsersComponent, data: { permission: 'Pages.Users' }, canActivate: [AppRouteGuard] },
                     { path: 'roles', component: RolesComponent, data: { permission: 'Pages.Roles' }, canActivate: [AppRouteGuard] },
                     { path: 'tenants', component: TenantsComponent, data: { permission: 'Pages.Tenants' }, canActivate: [AppRouteGuard] },

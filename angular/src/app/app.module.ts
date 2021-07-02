@@ -41,6 +41,12 @@ import { SidebarMenuComponent } from './layout/sidebar-menu.component';
 import { ProductComponent } from './products/product/product.component';
 import { CreateProductComponent } from './products/create-product/create-product.component';
 import { EditProductComponent } from './products/edit-product/edit-product.component';
+import { BrandComponent } from './productBrands/brand/brand.component';
+import { CreateBrandComponent } from './productBrands/create-brand/create-brand.component';
+import { EditBrandComponent } from './productBrands/edit-brand/edit-brand.component';
+import { TypeComponent } from './productTypes/type/type.component';
+import { CreateTypeComponent } from './productTypes/create-type/create-type.component';
+import { EditTypeComponent } from './productTypes/edit-type/edit-type.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +80,12 @@ import { EditProductComponent } from './products/edit-product/edit-product.compo
     ProductComponent,
     CreateProductComponent,
     EditProductComponent,
+    BrandComponent,
+    CreateBrandComponent,
+    EditBrandComponent,
+    TypeComponent,
+    CreateTypeComponent,
+    EditTypeComponent,
   ],
   imports: [
     CommonModule,
