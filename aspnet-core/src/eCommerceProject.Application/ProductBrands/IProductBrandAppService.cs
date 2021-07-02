@@ -10,5 +10,7 @@ namespace eCommerceProject.ProductBrands
 {
     public interface IProductBrandAppService : IAsyncCrudAppService<ProductBrandDto, int>
     {
+        public Task<List<ProductBrandDto>> GetAllBrandsAsync();
+        public Task<ProductBrandDto> GetBrandAsync(ProductBrandDto input);
     }
 }

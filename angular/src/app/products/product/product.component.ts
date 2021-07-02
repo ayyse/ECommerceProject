@@ -1,8 +1,9 @@
+import { ProductBrandDto, ProductDto } from './../../../shared/service-proxies/service-proxies';
 import { EditProductComponent } from './../edit-product/edit-product.component';
 import { CreateProductComponent } from './../create-product/create-product.component';
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { ProductDto, ProductServiceProxy } from '@shared/service-proxies/service-proxies';
+import { ProductServiceProxy } from '@shared/service-proxies/service-proxies';
 
 @Component({
   selector: 'app-product',
@@ -13,7 +14,7 @@ export class ProductComponent implements OnInit {
 
   product : ProductDto = new ProductDto()
   products: ProductDto[] = []
-
+  brands: ProductBrandDto[] = []
 
   constructor(
     private productService: ProductServiceProxy,

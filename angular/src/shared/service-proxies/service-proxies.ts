@@ -383,7 +383,7 @@ export class ProductServiceProxy {
      * @return Success
      */
     getAllProducts(): Observable<ProductDto[]> {
-        let url_ = this.baseUrl + "/api/services/app/Product/getAllProducts";
+        let url_ = this.baseUrl + "/api/services/app/Product/GetAllProducts";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -536,7 +536,7 @@ export class ProductServiceProxy {
      * @return Success
      */
     getAllProductsByBrand(brandId: number | undefined): Observable<ProductDto[]> {
-        let url_ = this.baseUrl + "/api/services/app/Product/getAllProductsByBrand?";
+        let url_ = this.baseUrl + "/api/services/app/Product/GetAllProductsByBrand?";
         if (brandId === null)
             throw new Error("The parameter 'brandId' cannot be null.");
         else if (brandId !== undefined)
@@ -599,7 +599,7 @@ export class ProductServiceProxy {
      * @return Success
      */
     getAllProductsByType(typeId: number | undefined): Observable<ProductDto[]> {
-        let url_ = this.baseUrl + "/api/services/app/Product/getAllProductsByType?";
+        let url_ = this.baseUrl + "/api/services/app/Product/GetAllProductsByType?";
         if (typeId === null)
             throw new Error("The parameter 'typeId' cannot be null.");
         else if (typeId !== undefined)
@@ -787,6 +787,123 @@ export class ProductBrandServiceProxy {
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+    }
+
+    /**
+     * @return Success
+     */
+    getAllBrands(): Observable<ProductBrandDto[]> {
+        let url_ = this.baseUrl + "/api/services/app/ProductBrand/GetAllBrands";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetAllBrands(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetAllBrands(<any>response_);
+                } catch (e) {
+                    return <Observable<ProductBrandDto[]>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<ProductBrandDto[]>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetAllBrands(response: HttpResponseBase): Observable<ProductBrandDto[]> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200.push(ProductBrandDto.fromJS(item));
+            }
+            else {
+                result200 = <any>null;
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ProductBrandDto[]>(<any>null);
+    }
+
+    /**
+     * @param name (optional) 
+     * @param id (optional) 
+     * @return Success
+     */
+    getBrand(name: string | null | undefined, id: number | undefined): Observable<ProductBrandDto> {
+        let url_ = this.baseUrl + "/api/services/app/ProductBrand/GetBrand?";
+        if (name !== undefined && name !== null)
+            url_ += "Name=" + encodeURIComponent("" + name) + "&";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetBrand(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetBrand(<any>response_);
+                } catch (e) {
+                    return <Observable<ProductBrandDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<ProductBrandDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetBrand(response: HttpResponseBase): Observable<ProductBrandDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ProductBrandDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ProductBrandDto>(<any>null);
     }
 
     /**
@@ -1083,6 +1200,123 @@ export class ProductTypeServiceProxy {
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+    }
+
+    /**
+     * @return Success
+     */
+    getAllTypes(): Observable<ProductTypeDto[]> {
+        let url_ = this.baseUrl + "/api/services/app/ProductType/GetAllTypes";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetAllTypes(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetAllTypes(<any>response_);
+                } catch (e) {
+                    return <Observable<ProductTypeDto[]>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<ProductTypeDto[]>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetAllTypes(response: HttpResponseBase): Observable<ProductTypeDto[]> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200.push(ProductTypeDto.fromJS(item));
+            }
+            else {
+                result200 = <any>null;
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ProductTypeDto[]>(<any>null);
+    }
+
+    /**
+     * @param name (optional) 
+     * @param id (optional) 
+     * @return Success
+     */
+    getType(name: string | null | undefined, id: number | undefined): Observable<ProductTypeDto> {
+        let url_ = this.baseUrl + "/api/services/app/ProductType/GetType?";
+        if (name !== undefined && name !== null)
+            url_ += "Name=" + encodeURIComponent("" + name) + "&";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetType(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetType(<any>response_);
+                } catch (e) {
+                    return <Observable<ProductTypeDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<ProductTypeDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetType(response: HttpResponseBase): Observable<ProductTypeDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ProductTypeDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ProductTypeDto>(<any>null);
     }
 
     /**

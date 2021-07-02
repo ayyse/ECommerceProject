@@ -1,3 +1,4 @@
+import { ProductBrandDto, ProductTypeDto, ProductBrandServiceProxy, ProductTypeServiceProxy } from './../../../shared/service-proxies/service-proxies';
 
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ProductDto, ProductServiceProxy } from '@shared/service-proxies/service-proxies';
@@ -14,15 +15,33 @@ export class CreateProductComponent implements OnInit {
   saving = false;
   product: ProductDto = new ProductDto()
   products: ProductDto[] = []
+  brands: ProductBrandDto[] = []
+  types: ProductTypeDto[] = []
 
   @Output() onSave = new EventEmitter<any>()
 
   constructor(
     public productService: ProductServiceProxy,
+    public brandService: ProductBrandServiceProxy,
+    public typeService: ProductTypeServiceProxy,
     public bsModalRef: BsModalRef
   ) { }
 
   ngOnInit(): void {
+    this.getAllBrands()
+    this.getAllTypes()
+  }
+
+  getAllBrands(){
+    this.brandService.getAllBrands().subscribe(response => {
+      this.brands = response
+    })
+  }
+
+  getAllTypes(){
+    this.typeService.getAllTypes().subscribe(response => {
+      this.types = response
+    })
   }
 
   save(): void {

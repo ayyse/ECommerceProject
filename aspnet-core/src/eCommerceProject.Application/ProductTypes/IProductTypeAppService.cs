@@ -10,5 +10,7 @@ namespace eCommerceProject.ProductTypes
 {
     public interface IProductTypeAppService : IAsyncCrudAppService<ProductTypeDto, int>
     {
+        public Task<List<ProductTypeDto>> GetAllTypesAsync();
+        public Task<ProductTypeDto> GetTypeAsync(ProductTypeDto input);
     }
 }

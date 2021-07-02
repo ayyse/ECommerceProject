@@ -49,7 +49,7 @@ namespace eCommerceProject.Products
             await _productRepository.DeleteAsync(deletedProduct);
         }
 
-        public async Task<List<ProductDto>> getAllProductsAsync()
+        public async Task<List<ProductDto>> GetAllProductsAsync()
         {
             var productList = await _productRepository.GetAll().ToListAsync();
             return _mapper.Map<List<ProductDto>>(productList);
@@ -61,13 +61,13 @@ namespace eCommerceProject.Products
             return _mapper.Map<ProductDto>(product); 
         }
 
-        public async Task<List<ProductDto>> getAllProductsByBrandAsync(int brandId)
+        public async Task<List<ProductDto>> GetAllProductsByBrandAsync(int brandId)
         {
             var productsByBrand = await _productRepository.GetAll().Where(x => x.ProductBrandId == brandId).ToListAsync();
             return _mapper.Map<List<ProductDto>>(productsByBrand);
         }
 
-        public async Task<List<ProductDto>> getAllProductsByTypeAsync(int typeId)
+        public async Task<List<ProductDto>> GetAllProductsByTypeAsync(int typeId)
         {
             var productsByType = await _productRepository.GetAll().Where(x => x.ProductTypeId == typeId).ToListAsync();
             return _mapper.Map<List<ProductDto>>(productsByType);

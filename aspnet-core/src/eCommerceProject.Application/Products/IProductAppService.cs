@@ -10,8 +10,9 @@ namespace eCommerceProject.Products
 {
     public interface IProductAppService : IAsyncCrudAppService<ProductDto, int>
     {
-        public Task<List<ProductDto>> getAllProductsAsync();
-        public Task<List<ProductDto>> getAllProductsByBrandAsync(int brandId);
-        public Task<List<ProductDto>> getAllProductsByTypeAsync(int typeId);
+        public Task<List<ProductDto>> GetAllProductsAsync();
+        public Task<ProductDto> GetProductAsync(ProductDto input);
+        public Task<List<ProductDto>> GetAllProductsByBrandAsync(int brandId);
+        public Task<List<ProductDto>> GetAllProductsByTypeAsync(int typeId);
     }
 }
