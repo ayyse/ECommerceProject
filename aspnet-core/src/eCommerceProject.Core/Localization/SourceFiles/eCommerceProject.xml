@@ -2,6 +2,18 @@
 <localizationDictionary culture="en">
   <texts>
     <text name="Products" value="Products" />
+    <text name="CreateNewProduct" value="Create New Product" />
+    <text name="ProductType" value="Product Type" />
+    <text name="ProductBrand" value="Product Brand" />
+    <text name="ProductName" value="Product Name" />
+    <text name="Description" value="Description" />
+    <text name="Color" value="Color" />
+    <text name="Price" value="Price" />
+    <text name="ShipmentPrice" value="Shipment Price" />
+    <text name="Operations" value="Operations" />
+    
+    
+    
     <text name="HomePage" value="Home page" />
     <text name="About" value="About" />
     <text name="WelcomeMessage" value="Welcome to eCommerceProject!" />

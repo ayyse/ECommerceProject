@@ -2,6 +2,17 @@
 <localizationDictionary culture="tr">
   <texts>
     <text name="Products" value="Ürünler" />
+    <text name="CreateNewProduct" value="Yeni Ürün Ekle" />
+    <text name="ProductType" value="Ürün Tipi" />
+    <text name="ProductBrand" value="Ürün Markası" />
+    <text name="ProductName" value="Ürün Adı" />
+    <text name="Description" value="Açıklama" />
+    <text name="Color" value="Renk" />
+    <text name="Price" value="Fiyat" />
+    <text name="ShipmentPrice" value="Kargo Fiyatı" />
+    <text name="Operations" value="İşlemler" />
+    
+    
     <text name="HomePage" value="Ana Sayfa" />
     <text name="About" value="Hakkında" />
     <text name="WelcomeMessage" value="eCommerceProject projesine hoşgeldiniz!" />
