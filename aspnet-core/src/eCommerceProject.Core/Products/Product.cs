@@ -8,7 +8,6 @@ namespace eCommerceProject.Products
         public ProductType ProductTypeFk { get; set; }
         
 
-
         public int ProductBrandId { get; set; }
         public ProductBrand ProductBrandFk { get; set; }
 
@@ -19,6 +18,5 @@ namespace eCommerceProject.Products
         public string Color { get; set; }
         public decimal Price { get; set; }
         public decimal ShipmentPrice { get; set; }
-
     }
 }

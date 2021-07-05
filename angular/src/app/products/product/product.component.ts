@@ -1,4 +1,4 @@
-import { ProductBrandDto, ProductDto } from './../../../shared/service-proxies/service-proxies';
+import { ProductBrandDto, ProductDto, ProductBrandServiceProxy } from './../../../shared/service-proxies/service-proxies';
 import { EditProductComponent } from './../edit-product/edit-product.component';
 import { CreateProductComponent } from './../create-product/create-product.component';
 import { Component, OnInit } from '@angular/core';
@@ -12,42 +12,48 @@ import { ProductServiceProxy } from '@shared/service-proxies/service-proxies';
 })
 export class ProductComponent implements OnInit {
 
-  product : ProductDto = new ProductDto()
+  product: ProductDto = new ProductDto()
   products: ProductDto[] = []
   brands: ProductBrandDto[] = []
 
   constructor(
     private productService: ProductServiceProxy,
+    private brandService: ProductBrandServiceProxy,
     private _modalService: BsModalService) { }
 
   ngOnInit(): void {
     this.getAllProducts()
+    this.getAllBrands()
   }
 
-  getAllProducts(){
+  getAllProducts() {
     this.productService.getAllProducts().subscribe(response => {
       this.products = response
       console.log(this.products)
     })
   }
 
-  getAllProductsByBrandId(brandId: number){
-    this.productService.getAllProductsByBrand(brandId).subscribe(response => {
-      this.products = response
+  getAllBrands(){
+    this.brandService.getAllBrands().subscribe(response => {
+      this.brands = response
     })
   }
 
-  getAllProductsByTypeId(typeId: number){
+  getAllProductsByBrandId(productBrandId: number) {
+    this.productService.getAllProductsByBrand(productBrandId).subscribe(response => {
+      this.products = response
+      console.log(this.products)
+    })
+  }
+
+  getAllProductsByTypeId(typeId: number) {
     this.productService.getAllProductsByType(typeId).subscribe(response => {
       this.products = response
     })
   }
 
-  deleteProduct(product : ProductDto){
-    this.productService.delete(product.id).subscribe(() => {
-      this.products.slice(product.id)
-      this.getAllProducts()
-    })
+  deleteProduct(id: number) {
+    this.productService.delete(id).subscribe()
   }
 
   createProductModal(): void {
