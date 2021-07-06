@@ -1,3 +1,4 @@
+import { UserProductComponent } from './userProducts/user-product/user-product.component';
 import { TypeComponent } from './productTypes/type/type.component';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -23,6 +24,7 @@ import { BrandComponent } from './productBrands/brand/brand.component';
                     { path: 'products', component: ProductComponent, canActivate: [AppRouteGuard] },
                     { path: 'brands', component: BrandComponent, canActivate: [AppRouteGuard] },
                     { path: 'types', component: TypeComponent, canActivate: [AppRouteGuard] },
+                    { path: 'shop', component: UserProductComponent, canActivate: [AppRouteGuard] },
                     { path: 'users', component: UsersComponent, data: { permission: 'Pages.Users' }, canActivate: [AppRouteGuard] },
                     { path: 'roles', component: RolesComponent, data: { permission: 'Pages.Roles' }, canActivate: [AppRouteGuard] },
                     { path: 'tenants', component: TenantsComponent, data: { permission: 'Pages.Tenants' }, canActivate: [AppRouteGuard] },

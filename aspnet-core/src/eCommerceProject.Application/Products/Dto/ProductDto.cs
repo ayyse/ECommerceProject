@@ -1,5 +1,6 @@
 ﻿using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
+using Microsoft.AspNetCore.Http;
 
 namespace eCommerceProject.Products.Dto
 {
@@ -8,11 +9,7 @@ namespace eCommerceProject.Products.Dto
     public class ProductDto : EntityDto<int>
     {
         public int ProductTypeId { get; set; }
-        public ProductType ProductTypeFk { get; set; }
-
-
         public int ProductBrandId { get; set; }
-        public ProductBrand ProductBrandFk { get; set; }
 
 
         public string Name { get; set; }

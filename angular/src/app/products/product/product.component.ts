@@ -42,7 +42,6 @@ export class ProductComponent implements OnInit {
   getAllProductsByBrandId(productBrandId: number) {
     this.productService.getAllProductsByBrand(productBrandId).subscribe(response => {
       this.products = response
-      console.log(this.products)
     })
   }
 

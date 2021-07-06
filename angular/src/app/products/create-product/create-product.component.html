@@ -73,6 +73,14 @@
         <abp-validation-summary [control]="shipmentPriceModel" [controlEl]="shipmentPriceEl"></abp-validation-summary>
       </div>
     </div>
+    <div class="form-group row required">
+      <label class="col-md-3 col-form-label" for="imageUrl">
+        {{ "Image" | localize }}
+      </label>
+      <div class="col-md-9">
+        <input type="url" class="form-control" name="imageUrl" id="imageUrl" required [(ngModel)]="product.imageUrl" accept="image/*" />
+      </div>
+    </div>
   </div>
   <abp-modal-footer [cancelDisabled]="saving" [saveDisabled]="!createProductForm.form.valid || saving"
     (onCancelClick)="bsModalRef.hide()"></abp-modal-footer>
