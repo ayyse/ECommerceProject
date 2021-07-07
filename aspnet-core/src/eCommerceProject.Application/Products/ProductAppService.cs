@@ -55,9 +55,9 @@ namespace eCommerceProject.Products
             return _mapper.Map<List<ProductDto>>(productList);
         }
 
-        public async Task<ProductDto> GetProductAsync(ProductDto input)
+        public async Task<ProductDto> GetProductAsync(int productId)
         {
-            var product = await _productRepository.FirstOrDefaultAsync(x => x.Id == input.Id);
+            var product = await _productRepository.FirstOrDefaultAsync(x => x.Id == productId);
             return _mapper.Map<ProductDto>(product); 
         }
 
