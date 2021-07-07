@@ -9,11 +9,16 @@ import { Component, OnInit } from '@angular/core';
 export class UserProductComponent implements OnInit {
 
   products: ProductDto[] = []
+  product: ProductDto = new ProductDto()
+  brands: ProductBrandDto[] = []
 
-  constructor(private productService: ProductServiceProxy) { }
+  constructor(
+    private productService: ProductServiceProxy,
+    private brandService: ProductBrandServiceProxy) { }
 
   ngOnInit(): void {
     this.getAllProducts()
+    this.getAllBrands()
   }
 
   getAllProducts() {
@@ -21,4 +26,24 @@ export class UserProductComponent implements OnInit {
       this.products = response
     })
   }
+
+  getAllBrands() {
+    this.brandService.getAllBrands().subscribe(response => {
+      this.brands = response
+    })
+  }
+
+  getAllProductsByBrandId(productBrandId: number) {
+    this.productService.getAllProductsByBrand(productBrandId).subscribe(response => {
+      this.products = response
+    })
+  }
+
+  getProductDetail(productId: number) {
+    this.productService.getProduct(productId).subscribe(response => {
+      this.product = response
+      console.log(this.product)
+    })
+  }
+
 }
