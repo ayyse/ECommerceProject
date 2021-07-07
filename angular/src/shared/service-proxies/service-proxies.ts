@@ -438,47 +438,15 @@ export class ProductServiceProxy {
     }
 
     /**
-     * @param productTypeId (optional) 
-     * @param productBrandId (optional) 
-     * @param name (optional) 
-     * @param description (optional) 
-     * @param imageUrl (optional) 
-     * @param color (optional) 
-     * @param price (optional) 
-     * @param shipmentPrice (optional) 
-     * @param id (optional) 
+     * @param productId (optional) 
      * @return Success
      */
-    getProduct(productTypeId: number | undefined, productBrandId: number | undefined, name: string | null | undefined, description: string | null | undefined, imageUrl: string | null | undefined, color: string | null | undefined, price: number | undefined, shipmentPrice: number | undefined, id: number | undefined): Observable<ProductDto> {
+    getProduct(productId: number | undefined): Observable<ProductDto> {
         let url_ = this.baseUrl + "/api/services/app/Product/GetProduct?";
-        if (productTypeId === null)
-            throw new Error("The parameter 'productTypeId' cannot be null.");
-        else if (productTypeId !== undefined)
-            url_ += "ProductTypeId=" + encodeURIComponent("" + productTypeId) + "&";
-        if (productBrandId === null)
-            throw new Error("The parameter 'productBrandId' cannot be null.");
-        else if (productBrandId !== undefined)
-            url_ += "ProductBrandId=" + encodeURIComponent("" + productBrandId) + "&";
-        if (name !== undefined && name !== null)
-            url_ += "Name=" + encodeURIComponent("" + name) + "&";
-        if (description !== undefined && description !== null)
-            url_ += "Description=" + encodeURIComponent("" + description) + "&";
-        if (imageUrl !== undefined && imageUrl !== null)
-            url_ += "ImageUrl=" + encodeURIComponent("" + imageUrl) + "&";
-        if (color !== undefined && color !== null)
-            url_ += "Color=" + encodeURIComponent("" + color) + "&";
-        if (price === null)
-            throw new Error("The parameter 'price' cannot be null.");
-        else if (price !== undefined)
-            url_ += "Price=" + encodeURIComponent("" + price) + "&";
-        if (shipmentPrice === null)
-            throw new Error("The parameter 'shipmentPrice' cannot be null.");
-        else if (shipmentPrice !== undefined)
-            url_ += "ShipmentPrice=" + encodeURIComponent("" + shipmentPrice) + "&";
-        if (id === null)
-            throw new Error("The parameter 'id' cannot be null.");
-        else if (id !== undefined)
-            url_ += "Id=" + encodeURIComponent("" + id) + "&";
+        if (productId === null)
+            throw new Error("The parameter 'productId' cannot be null.");
+        else if (productId !== undefined)
+            url_ += "productId=" + encodeURIComponent("" + productId) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {

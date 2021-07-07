@@ -48,6 +48,7 @@ import { TypeComponent } from './productTypes/type/type.component';
 import { CreateTypeComponent } from './productTypes/create-type/create-type.component';
 import { EditTypeComponent } from './productTypes/edit-type/edit-type.component';
 import { UserProductComponent } from './userProducts/user-product/user-product.component';
+import { DetailUserProductComponent } from './userProducts/detail-user-product/detail-user-product.component';
 
 @NgModule({
   declarations: [
@@ -88,6 +89,7 @@ import { UserProductComponent } from './userProducts/user-product/user-product.c
     CreateTypeComponent,
     EditTypeComponent,
     UserProductComponent,
+    DetailUserProductComponent,
   ],
   imports: [
     CommonModule,
