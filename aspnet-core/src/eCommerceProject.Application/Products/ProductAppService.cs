@@ -4,13 +4,11 @@ using Abp.Authorization;
 using Abp.Domain.Repositories;
 using Abp.ObjectMapping;
 using eCommerceProject.Authorization;
-using eCommerceProject.Products;
+using eCommerceProject.DbModels;
 using eCommerceProject.Products.Dto;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace eCommerceProject.Products

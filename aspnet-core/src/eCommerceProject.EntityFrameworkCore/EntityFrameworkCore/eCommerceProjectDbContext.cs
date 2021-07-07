@@ -1,9 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Abp.Zero.EntityFrameworkCore;
+﻿using Abp.Zero.EntityFrameworkCore;
 using eCommerceProject.Authorization.Roles;
 using eCommerceProject.Authorization.Users;
+using eCommerceProject.DbModels;
 using eCommerceProject.MultiTenancy;
-using eCommerceProject.Products;
+using Microsoft.EntityFrameworkCore;
 
 namespace eCommerceProject.EntityFrameworkCore
 {
@@ -19,5 +19,7 @@ namespace eCommerceProject.EntityFrameworkCore
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductBrand> ProductBrands { get; set; }
         public virtual DbSet<ProductType> ProductTypes { get; set; }
+        public virtual DbSet<BasketItem> Items { get; set; }
+        public virtual DbSet<CustomerBasket> Baskets { get; set; }
     }
 }

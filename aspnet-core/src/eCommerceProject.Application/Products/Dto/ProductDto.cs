@@ -1,6 +1,6 @@
 ﻿using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
-using Microsoft.AspNetCore.Http;
+using eCommerceProject.DbModels;
 
 namespace eCommerceProject.Products.Dto
 {

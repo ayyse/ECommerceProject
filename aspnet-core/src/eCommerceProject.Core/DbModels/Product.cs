@@ -1,6 +1,6 @@
 ﻿using Abp.Domain.Entities;
 
-namespace eCommerceProject.Products
+namespace eCommerceProject.DbModels
 {
     public class Product : Entity<int>
     {

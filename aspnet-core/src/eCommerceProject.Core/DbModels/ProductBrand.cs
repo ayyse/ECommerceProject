@@ -1,7 +1,7 @@
 ﻿using Abp.Domain.Entities;
 using System.Collections.Generic;
 
-namespace eCommerceProject.Products
+namespace eCommerceProject.DbModels
 {
     public class ProductBrand : Entity<int>
     {
