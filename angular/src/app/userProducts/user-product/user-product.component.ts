@@ -39,11 +39,6 @@ export class UserProductComponent implements OnInit {
     })
   }
 
-  getProductDetail(productId: number) {
-    this.productService.getProduct(productId).subscribe(response => {
-      this.product = response
-      console.log(this.product)
-    })
-  }
+
 
 }
