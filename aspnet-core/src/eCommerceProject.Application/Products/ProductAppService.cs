@@ -49,7 +49,11 @@ namespace eCommerceProject.Products
 
         public async Task<List<ProductDto>> GetAllProductsAsync()
         {
-            var productList = await _productRepository.GetAll().ToListAsync();
+            var productList = await _productRepository.GetAll()
+                .Include(x => x.ProductBrandFk)
+                .Include(x => x.ProductTypeFk)
+                .Include(x => x.ProductColorFk)
+                .ToListAsync();
             return _mapper.Map<List<ProductDto>>(productList);
         }
 
