@@ -19,6 +19,7 @@ using Abp.Json;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
+using StackExchange.Redis;
 
 namespace eCommerceProject.Web.Host.Startup
 {
@@ -51,6 +52,11 @@ namespace eCommerceProject.Web.Host.Startup
                 {
                     NamingStrategy = new CamelCaseNamingStrategy()
                 };
+            });
+
+            services.AddSingleton<ConnectionMultiplexer>(x => {
+                var configuration = ConfigurationOptions.Parse(_appConfiguration.GetConnectionString("Redis"), true);
+                return ConnectionMultiplexer.Connect(configuration);
             });
 
 

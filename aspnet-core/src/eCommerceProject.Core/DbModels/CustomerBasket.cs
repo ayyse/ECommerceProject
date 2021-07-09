@@ -7,8 +7,18 @@ using System.Threading.Tasks;
 
 namespace eCommerceProject.DbModels
 {
-    public class CustomerBasket : Entity<int>
+    public class CustomerBasket : Entity<string>
     {
+        public CustomerBasket()
+        {
+
+        }
+
+        public CustomerBasket(string id)
+        {
+            Id = id;
+        }
+
         public List<BasketItem> Items { get; set; } = new List<BasketItem>();
     }
 }
