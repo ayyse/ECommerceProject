@@ -18,6 +18,7 @@ namespace eCommerceProject.EntityFrameworkCore
 
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductBrand> ProductBrands { get; set; }
+        public virtual DbSet<ProductColor> ProductColors { get; set; }
         public virtual DbSet<ProductType> ProductTypes { get; set; }
         public virtual DbSet<BasketItem> Items { get; set; }
         public virtual DbSet<CustomerBasket> Baskets { get; set; }

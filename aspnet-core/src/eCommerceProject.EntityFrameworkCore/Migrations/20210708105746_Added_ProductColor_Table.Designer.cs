@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eCommerceProject.EntityFrameworkCore;
 
 namespace eCommerceProject.Migrations
 {
     [DbContext(typeof(eCommerceProjectDbContext))]
-    partial class eCommerceProjectDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210708105746_Added_ProductColor_Table")]
+    partial class Added_ProductColor_Table
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1555,9 +1557,6 @@ namespace eCommerceProject.Migrations
                     b.Property<decimal>("ShipmentPrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("TenantId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Type")
                         .HasColumnType("nvarchar(max)");
 
@@ -1602,7 +1601,7 @@ namespace eCommerceProject.Migrations
                     b.Property<int>("ProductBrandId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ProductColorId")
+                    b.Property<int>("ProductColorId")
                         .HasColumnType("int");
 
                     b.Property<int>("ProductTypeId")
@@ -1649,7 +1648,7 @@ namespace eCommerceProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProductColors");
+                    b.ToTable("ProductColor");
                 });
 
             modelBuilder.Entity("eCommerceProject.DbModels.ProductType", b =>
@@ -1965,7 +1964,9 @@ namespace eCommerceProject.Migrations
 
                     b.HasOne("eCommerceProject.DbModels.ProductColor", "ProductColorFk")
                         .WithMany()
-                        .HasForeignKey("ProductColorId");
+                        .HasForeignKey("ProductColorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("eCommerceProject.DbModels.ProductType", "ProductTypeFk")
                         .WithMany("Products")

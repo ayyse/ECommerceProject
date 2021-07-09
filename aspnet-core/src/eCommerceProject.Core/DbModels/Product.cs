@@ -11,11 +11,13 @@ namespace eCommerceProject.DbModels
         public int ProductBrandId { get; set; }
         public ProductBrand ProductBrandFk { get; set; }
 
+        public int? ProductColorId { get; set; }
+        public ProductColor ProductColorFk { get; set; }
+
 
         public string Name { get; set; }
         public string Description { get; set; }
         public string ImageUrl { get; set; }
-        public string Color { get; set; }
         public decimal Price { get; set; }
         public decimal ShipmentPrice { get; set; }
     }
