@@ -79,6 +79,11 @@ export class SidebarMenuComponent extends AppComponentBase implements OnInit {
                 'fas fa-bars',
             ),
             new MenuItem(
+                this.l('Colors'),
+                '/app/colors',
+                'fas fa-bars',
+            ),
+            new MenuItem(
                 this.l('Shop'),
                 '/app/shop',
                 'fas fa-bars',

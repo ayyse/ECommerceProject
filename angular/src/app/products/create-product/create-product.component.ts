@@ -1,7 +1,7 @@
 import { ProductBrandDto, ProductTypeDto, ProductBrandServiceProxy, ProductTypeServiceProxy } from './../../../shared/service-proxies/service-proxies';
 
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { ProductDto, ProductServiceProxy } from '@shared/service-proxies/service-proxies';
+import { ProductDto, ProductServiceProxy, ProductColorServiceProxy, ProductColorDto } from '@shared/service-proxies/service-proxies';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { finalize } from 'rxjs/operators';
 
@@ -17,6 +17,7 @@ export class CreateProductComponent implements OnInit {
   products: ProductDto[] = []
   brands: ProductBrandDto[] = []
   types: ProductTypeDto[] = []
+  colors: ProductColorDto[] = []
 
   @Output() onSave = new EventEmitter<any>()
 
@@ -24,12 +25,14 @@ export class CreateProductComponent implements OnInit {
     public productService: ProductServiceProxy,
     public brandService: ProductBrandServiceProxy,
     public typeService: ProductTypeServiceProxy,
+    public colorService: ProductColorServiceProxy,
     public bsModalRef: BsModalRef
   ) { }
 
   ngOnInit(): void {
     this.getAllBrands()
     this.getAllTypes()
+    this.getAllColors()
   }
 
   getAllBrands(){
@@ -41,6 +44,12 @@ export class CreateProductComponent implements OnInit {
   getAllTypes(){
     this.typeService.getAllTypes().subscribe(response => {
       this.types = response
+    })
+  }
+
+  getAllColors(){
+    this.colorService.getAllColors().subscribe(response => {
+      this.colors = response
     })
   }
 

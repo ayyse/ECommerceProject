@@ -12,7 +12,7 @@
                     <img style="max-width:100%;" [src] = "product?.imageUrl" />
                 </div>
                 <div class="col-xs-5" style="border:0px solid gray">
-                    <h3><b>{{ product?.name }}</b> {{ product?.description }} </h3>
+                    <h3><b>{{ product?.productBrandFk.name }}</b> {{ product?.description }} </h3>
                     <!-- <h5 style="color:#337ab7">vendido por <a href="#">Samsung</a> · <small style="color:#337ab7">(5054 ventas)</small></h5> -->
 
                     <!-- <h6 class="title-price"><small>PRECIO OFERTA</small></h6> -->
@@ -21,7 +21,7 @@
                     <div class="section">
                         <h6 class="title-attr" style="margin-top:15px;" ><small>COLOR</small></h6>
                         <div>
-                            <div class="attr">{{ product?.color}}</div>
+                            <!-- <div class="attr">{{ product?.color}}</div> -->
                         </div>
                     </div>
                     <!-- <div class="section" style="padding-bottom:5px;">

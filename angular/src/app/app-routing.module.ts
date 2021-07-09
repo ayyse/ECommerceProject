@@ -13,6 +13,7 @@ import { RolesComponent } from 'app/roles/roles.component';
 import { ChangePasswordComponent } from './users/change-password/change-password.component';
 import { ProductComponent } from './products/product/product.component';
 import { BrandComponent } from './productBrands/brand/brand.component';
+import { ColorComponent } from './productColors/color/color.component';
 
 @NgModule({
     imports: [
@@ -26,6 +27,7 @@ import { BrandComponent } from './productBrands/brand/brand.component';
                     { path: 'products', component: ProductComponent, canActivate: [AppRouteGuard] },
                     { path: 'brands', component: BrandComponent, canActivate: [AppRouteGuard] },
                     { path: 'types', component: TypeComponent, canActivate: [AppRouteGuard] },
+                    { path: 'colors', component: ColorComponent, canActivate: [AppRouteGuard] },
                     { path: 'shop', component: UserProductComponent, canActivate: [AppRouteGuard] },
                     { path: 'users', component: UsersComponent, data: { permission: 'Pages.Users' }, canActivate: [AppRouteGuard] },
                     { path: 'roles', component: RolesComponent, data: { permission: 'Pages.Roles' }, canActivate: [AppRouteGuard] },
