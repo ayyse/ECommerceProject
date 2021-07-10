@@ -1,9 +1,7 @@
-﻿using Abp.Application.Services;
-using Abp.ObjectMapping;
+﻿using Abp.ObjectMapping;
 using eCommerceProject.CustomerBaskets.Dto;
 using eCommerceProject.DbModels;
-using eCommerceProject.Interfaces;
-using System.Collections.Generic;
+using eCommerceProject.EntityFrameworkCore.Repositories;
 using System.Threading.Tasks;
 
 namespace eCommerceProject.CustomerBaskets
@@ -27,14 +25,14 @@ namespace eCommerceProject.CustomerBaskets
         public async Task<CustomerBasketDto> GetBasketAsync(string basketId)
         {
             var basket = await _basketRepository.GetBasketAsync(basketId);
-            //return _mapper.Map<CustomerBasketDto>(basket);
-            return basket;
+            return _mapper.Map<CustomerBasketDto>(basket);
         }
 
         public async Task<CustomerBasketDto> UpdateAsync(CustomerBasketDto input)
         {
-            var updatedBasket = await _basketRepository.UpdateBasketAsync(input);
-            return updatedBasket;
+            var basket = _mapper.Map<CustomerBasket>(input);
+            var updatedBasket = await _basketRepository.UpdateBasketAsync(basket);
+            return _mapper.Map<CustomerBasketDto>(updatedBasket);
         }
     }
 }

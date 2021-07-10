@@ -20,6 +20,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
 using StackExchange.Redis;
+using eCommerceProject.EntityFrameworkCore.Repositories;
 
 namespace eCommerceProject.Web.Host.Startup
 {
@@ -58,6 +59,8 @@ namespace eCommerceProject.Web.Host.Startup
                 var configuration = ConfigurationOptions.Parse(_appConfiguration.GetConnectionString("Redis"), true);
                 return ConnectionMultiplexer.Connect(configuration);
             });
+
+            services.AddScoped<ICustomerBasketRepository, CustomerBasketRepository>();
 
 
 

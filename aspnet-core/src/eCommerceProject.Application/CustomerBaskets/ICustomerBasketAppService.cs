@@ -1,7 +1,4 @@
-﻿using Abp.Application.Services;
-using Abp.Application.Services.Dto;
-using eCommerceProject.CustomerBaskets.Dto;
-using System.Collections.Generic;
+﻿using eCommerceProject.CustomerBaskets.Dto;
 using System.Threading.Tasks;
 
 namespace eCommerceProject.CustomerBaskets

@@ -25,7 +25,6 @@
     <PackageReference Include="StackExchange.Redis" Version="2.2.62" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\eCommerceProject.Application\eCommerceProject.Application.csproj" />
     <ProjectReference Include="..\eCommerceProject.Core\eCommerceProject.Core.csproj" />
   </ItemGroup>
 </Project>

@@ -1,11 +1,10 @@
-﻿using eCommerceProject.CustomerBaskets.Dto;
-using eCommerceProject.Interfaces;
+﻿using eCommerceProject.DbModels;
 using StackExchange.Redis;
 using System;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace eCommerceProject.Implements
+namespace eCommerceProject.EntityFrameworkCore.Repositories
 {
     public class CustomerBasketRepository : ICustomerBasketRepository
     {
@@ -21,13 +20,13 @@ namespace eCommerceProject.Implements
             return await _database.KeyDeleteAsync(basketId);
         }
 
-        public async Task<CustomerBasketDto> GetBasketAsync(string basketId)
+        public async Task<CustomerBasket> GetBasketAsync(string basketId)
         {
             var basket = await _database.StringGetAsync(basketId);
-            return basket.IsNullOrEmpty ? null : JsonSerializer.Deserialize<CustomerBasketDto>(basket);
+            return basket.IsNullOrEmpty ? null : JsonSerializer.Deserialize<CustomerBasket>(basket);
         }
 
-        public async Task<CustomerBasketDto> UpdateBasketAsync(CustomerBasketDto basket)
+        public async Task<CustomerBasket> UpdateBasketAsync(CustomerBasket basket)
         {
             var updated = await _database.StringSetAsync(basket.Id, JsonSerializer.Serialize(basket), TimeSpan.FromDays(30));
             if (!updated)
