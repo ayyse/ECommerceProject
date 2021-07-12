@@ -26,5 +26,6 @@ namespace eCommerceProject.Products.Dto
         public string ImageUrl { get; set; }
         public decimal Price { get; set; }
         public decimal ShipmentPrice { get; set; }
+        public int StockQuantity { get; set; }
     }
 }
