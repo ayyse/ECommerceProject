@@ -2,6 +2,55 @@
     <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon">
 </head>
 
+<nav class="navbar navbar-expand-md navbar-light">
+    <a class="navbar-brand" href="#!" style="margin-left: 40px;margin-right: 20px;">
+        <img src="https://mdbootstrap.com/img/logo/mdb-transaprent-noshadows.png" height="30" alt="mdb logo">
+    </a>
+    <div class="col-lg-6 col-sm-12" style="margin-right: 250px;">
+        <form action="#" class="search">
+            <div class="input-group w-100">
+                <input type="text" class="form-control" placeholder="Search">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Collapse button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav1"
+        aria-controls="basicExampleNav1" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Links -->
+    <div class="collapse navbar-collapse" id="basicExampleNav1" style="margin-right:40px">
+
+        <!-- Right -->
+        <form class="d-flex" style="margin-right: 10px;">
+            <button class="btn btn-outline-dark" type="submit" [routerLink]="['/app/basket']">
+                Profil
+            </button>
+        </form>
+        <form class="d-flex" style="margin-right: 10px;">
+            <button class="btn btn-outline-dark" type="submit" [routerLink]="['/app/basket']">
+                Favorites
+            </button>
+        </form>
+        <form class="d-flex">
+            <button class="btn btn-outline-dark" type="submit" [routerLink]="['/app/basket']">
+                Basket
+                <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+            </button>
+        </form>
+
+    </div>
+    <!-- Links -->
+
+</nav>
+
 <section class="section-intro">
 
     <div class="intro-banner-wrap">
@@ -27,7 +76,7 @@
                             tempor incididunt ut labor </p>
                     </figcaption>
                 </figure> <!-- iconbox // -->
-            </div><!-- col // -->
+            </div>
             <div class="col-md-4">
                 <figure class="itemside">
                     <div class="aside">
@@ -41,7 +90,7 @@
                             tempor incididunt ut labor </p>
                     </figcaption>
                 </figure> <!-- iconbox // -->
-            </div><!-- col // -->
+            </div>
             <div class="col-md-4">
                 <figure class="itemside">
                     <div class="aside">
@@ -55,20 +104,19 @@
                             tempor incididunt ut labor </p>
                     </figcaption>
                 </figure> <!-- iconbox // -->
-            </div><!-- col // -->
-        </div> <!-- row.// -->
+            </div>
+        </div>
 
-    </div> <!-- container.// -->
+    </div>
 </section>
 
 
 <div class="row" style="margin-left: 300px;">
-    <div class="col-md-3" *ngFor="let type of types">
-        <div class="card card-product-grid" align="center">
-            <a href="#" class="img-wrap"> <img [src]="type?.imageUrl" alt="..."> </a>
+    <div class="col-md-3" *ngFor="let type of types" [routerLink]="['/app/customerproducts']">
+        <div class="card card-product-grid" align="center" route>
+            <a class="img-wrap"> <img [src]="type?.imageUrl" alt="..."> </a>
             <figcaption class="info-wrap">
                 <div class="title" style="padding: 15px;" align="center" > <b>{{ type?.name }}</b> {{ type?.description }} </div>
-                <!-- <div class="price mt-1">$179.00</div>  -->
             </figcaption>
         </div>
     </div>

@@ -55,6 +55,7 @@ import { ColorComponent } from './productColors/color/color.component';
 import { UserProductComponent } from './userProducts/user-product/user-product.component';
 import { DetailUserProductComponent } from './userProducts/detail-user-product/detail-user-product.component';
 import { CustomerHomeComponent } from './customer-components/customer-home/customer-home.component';
+import { CustomerProductsComponent } from './customer-components/customer-products/customer-products.component';
 
 @NgModule({
   declarations: [
@@ -100,6 +101,7 @@ import { CustomerHomeComponent } from './customer-components/customer-home/custo
     UserProductComponent,
     DetailUserProductComponent,
     CustomerHomeComponent,
+    CustomerProductsComponent,
     // customer layout
   ],
   imports: [

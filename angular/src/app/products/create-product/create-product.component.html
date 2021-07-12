@@ -28,7 +28,7 @@
         {{ "ProductColor" | localize }}
       </label>
       <div class="col-md-9">
-        <select class="form-control" name="productTypeId" [(ngModel)]="product.productColorId">
+        <select class="form-control" name="productColorId" [(ngModel)]="product.productColorId">
           <option action>Select Color</option>
           <option *ngFor="let color of colors" [ngValue]="color.id">{{ color?.name }}</option>
         </select>
