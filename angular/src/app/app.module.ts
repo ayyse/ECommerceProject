@@ -38,6 +38,9 @@ import { SidebarComponent } from './layout/sidebar.component';
 import { SidebarLogoComponent } from './layout/sidebar-logo.component';
 import { SidebarUserPanelComponent } from './layout/sidebar-user-panel.component';
 import { SidebarMenuComponent } from './layout/sidebar-menu.component';
+// customer layout
+
+// admin
 import { ProductComponent } from './products/product/product.component';
 import { CreateProductComponent } from './products/create-product/create-product.component';
 import { EditProductComponent } from './products/edit-product/edit-product.component';
@@ -47,9 +50,11 @@ import { EditBrandComponent } from './productBrands/edit-brand/edit-brand.compon
 import { TypeComponent } from './productTypes/type/type.component';
 import { CreateTypeComponent } from './productTypes/create-type/create-type.component';
 import { EditTypeComponent } from './productTypes/edit-type/edit-type.component';
+import { ColorComponent } from './productColors/color/color.component';
+// customer
 import { UserProductComponent } from './userProducts/user-product/user-product.component';
 import { DetailUserProductComponent } from './userProducts/detail-user-product/detail-user-product.component';
-import { ColorComponent } from './productColors/color/color.component';
+import { CustomerHomeComponent } from './customer-components/customer-home/customer-home.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +85,7 @@ import { ColorComponent } from './productColors/color/color.component';
     SidebarLogoComponent,
     SidebarUserPanelComponent,
     SidebarMenuComponent,
+    // admin
     ProductComponent,
     CreateProductComponent,
     EditProductComponent,
@@ -89,9 +95,12 @@ import { ColorComponent } from './productColors/color/color.component';
     TypeComponent,
     CreateTypeComponent,
     EditTypeComponent,
+    ColorComponent,
+    //customer
     UserProductComponent,
     DetailUserProductComponent,
-    ColorComponent,
+    CustomerHomeComponent,
+    // customer layout
   ],
   imports: [
     CommonModule,
