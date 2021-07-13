@@ -33,11 +33,15 @@ namespace eCommerceProject.Web.Host.Startup
         private readonly IConfigurationRoot _appConfiguration;
         private readonly IWebHostEnvironment _hostingEnvironment;
 
-        public Startup(IWebHostEnvironment env)
+
+        public Startup(IWebHostEnvironment env, IConfiguration configuration)
         {
             _hostingEnvironment = env;
             _appConfiguration = env.GetAppConfiguration();
+            Configuration = configuration;
         }
+
+        public IConfiguration Configuration { get; }
 
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
@@ -55,8 +59,8 @@ namespace eCommerceProject.Web.Host.Startup
                 };
             });
 
-            services.AddSingleton<ConnectionMultiplexer>(x => {
-                var configuration = ConfigurationOptions.Parse(_appConfiguration.GetConnectionString("Redis"), true);
+            services.AddSingleton<IConnectionMultiplexer>(x => {
+                var configuration = ConfigurationOptions.Parse(Configuration.GetConnectionString("Redis"), true);
                 return ConnectionMultiplexer.Connect(configuration);
             });
 
