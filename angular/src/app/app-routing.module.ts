@@ -16,17 +16,23 @@ import { BrandComponent } from './productBrands/brand/brand.component';
 import { ColorComponent } from './productColors/color/color.component';
 import { CustomerProductsComponent } from './customer-components/customer-products/customer-products.component';
 import { CustomerProductDetailsComponent } from './customer-components/customer-product-details/customer-product-details.component';
+import { CustomerAppComponent } from './customer-layout/customer-app/customer-app.component';
 
-const routes: Routes = [
-    { path: 'customerhome', component: CustomerHomeComponent },
-    { path: 'customerproducts', component: CustomerProductsComponent },
-    { path: 'detail/:productId', component: CustomerProductDetailsComponent },
-]
 
 @NgModule({
     imports: [
         CommonModule,
-        RouterModule.forChild(routes),
+        RouterModule.forChild([
+            {
+                path: '',
+                component: CustomerAppComponent,
+                children: [
+                    { path: 'customerhome', component: CustomerHomeComponent },
+                    { path: 'customerproducts', component: CustomerProductsComponent },
+                    { path: 'detail/:productId', component: CustomerProductDetailsComponent },
+                ]
+            }
+        ]),
         RouterModule.forChild([
             {
                 path: '',

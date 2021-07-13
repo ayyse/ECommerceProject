@@ -55,6 +55,9 @@ import { ColorComponent } from './productColors/color/color.component';
 import { CustomerHomeComponent } from './customer-components/customer-home/customer-home.component';
 import { CustomerProductsComponent } from './customer-components/customer-products/customer-products.component';
 import { CustomerProductDetailsComponent } from './customer-components/customer-product-details/customer-product-details.component';
+import { CustomerHeaderComponent } from './customer-layout/customer-header/customer-header.component';
+import { CustomerFooterComponent } from './customer-layout/customer-footer/customer-footer.component';
+import { CustomerAppComponent } from './customer-layout/customer-app/customer-app.component';
 
 @NgModule({
   declarations: [
@@ -100,6 +103,9 @@ import { CustomerProductDetailsComponent } from './customer-components/customer-
     CustomerHomeComponent,
     CustomerProductsComponent,
     CustomerProductDetailsComponent,
+    CustomerHeaderComponent,
+    CustomerFooterComponent,
+    CustomerAppComponent,
     // customer layout
   ],
   imports: [

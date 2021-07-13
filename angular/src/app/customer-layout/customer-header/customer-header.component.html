@@ -1,0 +1,48 @@
+<nav class="navbar navbar-expand-md navbar-light">
+    <a class="navbar-brand" [routerLink]="['/app/customerhome']" style="margin-left: 40px;margin-right: 20px;">
+        <img src="https://mdbootstrap.com/img/logo/mdb-transaprent-noshadows.png" height="30" alt="mdb logo">
+    </a>
+    <div class="col-lg-6 col-sm-12" style="margin-right: 250px;">
+        <form action="#" class="search">
+            <div class="input-group w-100">
+                <input type="text" class="form-control" placeholder="Search">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Collapse button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav1"
+        aria-controls="basicExampleNav1" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Links -->
+    <div class="collapse navbar-collapse" id="basicExampleNav1" style="margin-right:40px">
+
+        <!-- Right -->
+        <form class="d-flex" style="margin-right: 10px;">
+            <button class="btn btn-outline-dark" type="submit" [routerLink]="['/app/basket']">
+                Profil
+            </button>
+        </form>
+        <form class="d-flex" style="margin-right: 10px;">
+            <button class="btn btn-outline-dark" type="submit" [routerLink]="['/app/basket']">
+                Favorites
+            </button>
+        </form>
+        <form class="d-flex">
+            <button class="btn btn-outline-dark" type="submit" [routerLink]="['/app/basket']">
+                Basket
+                <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+            </button>
+        </form>
+
+    </div>
+    <!-- Links -->
+
+</nav>
