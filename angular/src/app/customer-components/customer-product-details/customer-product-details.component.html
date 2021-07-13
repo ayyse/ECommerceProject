@@ -1,0 +1,86 @@
+<body>
+    <div class="card" style="margin: 100px">
+        <div class="row no-gutters">
+            <aside class="col-sm-6 border-right">
+                <article class="gallery-wrap">
+                    <div class="img-big-wrap" align="center">
+                        <a href="#"><img [src]="product?.imageUrl"></a>
+                    </div> <!-- img-big-wrap.// -->
+                    <!-- <div class="thumbs-wrap">
+                        <a href="#" class="item-thumb"> <img [src]="product?.imageUrl"></a>
+                        <a href="#" class="item-thumb"> <img src="bootstrap-ecommerce-html/images/items/10.jpg"></a>
+                        <a href="#" class="item-thumb"> <img src="bootstrap-ecommerce-html/images/items/7.jpg"></a>
+                        <a href="#" class="item-thumb"> <img src="bootstrap-ecommerce-html/images/items/8.jpg"></a>
+                    </div> -->
+                </article> <!-- gallery-wrap .end// -->
+            </aside>
+            <main class="col-sm-6">
+                <article class="content-body" style="padding: 30px">
+                    <h3 class="title"> <b> {{ product?.productBrandFk?.name }} </b> {{ product?.name }} </h3>
+                    <div class="rating-wrap mb-3">
+                        <span class="badge badge-warning"> <i class="fa fa-star"></i> 3.8</span>
+                        <small class="text-muted ml-2">45 reviews</small>
+                    </div>
+                    <p> {{ product?.description }} </p>
+
+                    <ul class="list-check mb-4">
+                        <li>Best performance of battery</li>
+                        <li>5 years warranty for this product</li>
+                        <li>Best performance of battery</li>
+                    </ul>
+
+                    <!-- <div class="item-option-select">
+                        <h6>Model</h6>
+                        <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-light active">
+                                <input type="radio" name="radio_size" checked=""> Xs
+                            </label>
+                            <label class="btn btn-light">
+                                <input type="radio" name="radio_size"> Xs Max
+                            </label>
+                        </div>
+                    </div> -->
+
+                    <div class="item-option-select">
+                        <h6>Color</h6>
+                        <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-light">
+                                <input type="radio" name="radio_color"> {{ product?.productColorFk?.name }}
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="item-option-select">
+                        <h6>Capacity</h6>
+                        <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-light active">
+                                <input type="radio" name="options" checked=""> 64 GB
+                            </label>
+                            <label class="btn btn-light">
+                                <input type="radio" name="options"> 256 GB
+                            </label>
+                            <label class="btn btn-light">
+                                <input type="radio" name="options"> 512 GB
+                            </label>
+                        </div>
+                    </div>
+
+
+                    <div class="row mt-3 align-items-center">
+                        <div class="col">
+                            <span class="price h4"> {{ product?.price }} &#x20BA; </span>
+                        </div> <!-- col.// -->
+                        <div class="col text-right">
+                            <a href="#" class="btn  btn-primary"> <span class="text">Add to cart</span> <i
+                                    class="icon fas fa-shopping-cart"></i> </a>
+                            <a href="#" class="btn  btn-light"> <i class="fas fa-heart"></i> </a>
+                            <a href="#" class="btn  btn-light"> <i class="fa fa-folder-plus"></i> </a>
+                        </div> <!-- col.// -->
+                    </div> <!-- row.// -->
+
+                </article> <!-- product-info-aside .// -->
+            </main> <!-- col.// -->
+        </div> <!-- row.// -->
+    </div>
+</body>
+

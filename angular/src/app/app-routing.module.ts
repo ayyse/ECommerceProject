@@ -1,7 +1,5 @@
 import { CustomerHomeComponent } from './customer-components/customer-home/customer-home.component';
 import { CommonModule } from '@angular/common';
-import { DetailUserProductComponent } from './userProducts/detail-user-product/detail-user-product.component';
-import { UserProductComponent } from './userProducts/user-product/user-product.component';
 import { TypeComponent } from './productTypes/type/type.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -16,11 +14,13 @@ import { ChangePasswordComponent } from './users/change-password/change-password
 import { ProductComponent } from './products/product/product.component';
 import { BrandComponent } from './productBrands/brand/brand.component';
 import { ColorComponent } from './productColors/color/color.component';
+import { CustomerProductsComponent } from './customer-components/customer-products/customer-products.component';
+import { CustomerProductDetailsComponent } from './customer-components/customer-product-details/customer-product-details.component';
 
 const routes: Routes = [
     { path: 'customerhome', component: CustomerHomeComponent },
-    { path: 'detail/:productId', component: DetailUserProductComponent },
-    { path: 'shop', component: UserProductComponent },
+    { path: 'customerproducts', component: CustomerProductsComponent },
+    { path: 'detail/:productId', component: CustomerProductDetailsComponent },
 ]
 
 @NgModule({

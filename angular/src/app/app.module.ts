@@ -52,10 +52,9 @@ import { CreateTypeComponent } from './productTypes/create-type/create-type.comp
 import { EditTypeComponent } from './productTypes/edit-type/edit-type.component';
 import { ColorComponent } from './productColors/color/color.component';
 // customer
-import { UserProductComponent } from './userProducts/user-product/user-product.component';
-import { DetailUserProductComponent } from './userProducts/detail-user-product/detail-user-product.component';
 import { CustomerHomeComponent } from './customer-components/customer-home/customer-home.component';
 import { CustomerProductsComponent } from './customer-components/customer-products/customer-products.component';
+import { CustomerProductDetailsComponent } from './customer-components/customer-product-details/customer-product-details.component';
 
 @NgModule({
   declarations: [
@@ -98,10 +97,9 @@ import { CustomerProductsComponent } from './customer-components/customer-produc
     EditTypeComponent,
     ColorComponent,
     //customer
-    UserProductComponent,
-    DetailUserProductComponent,
     CustomerHomeComponent,
     CustomerProductsComponent,
+    CustomerProductDetailsComponent,
     // customer layout
   ],
   imports: [

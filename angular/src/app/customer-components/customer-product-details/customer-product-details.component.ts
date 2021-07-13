@@ -1,22 +1,21 @@
-import { ProductBrandDto, ProductDto, ProductServiceProxy } from '@shared/service-proxies/service-proxies';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ProductDto, ProductServiceProxy } from '@shared/service-proxies/service-proxies';
 
 @Component({
-  selector: 'app-detail-user-product',
-  templateUrl: './detail-user-product.component.html',
-  styleUrls: ['./detail-user-product.component.css']
+  selector: 'app-customer-product-details',
+  templateUrl: './customer-product-details.component.html',
+  styleUrls: ['./customer-product-details.component.css']
 })
-export class DetailUserProductComponent implements OnInit {
+export class CustomerProductDetailsComponent implements OnInit {
 
   product: ProductDto = new ProductDto()
-  brand: ProductBrandDto = new ProductBrandDto()
   products: ProductDto[] = []
   productId: number
 
   constructor(
     private productService: ProductServiceProxy,
-     private route: ActivatedRoute) {
+    private route: ActivatedRoute) {
 
     this.route.params.subscribe(params => {
       this.productId = params['productId'];
@@ -33,4 +32,5 @@ export class DetailUserProductComponent implements OnInit {
       this.product = response
     })
   }
+
 }
