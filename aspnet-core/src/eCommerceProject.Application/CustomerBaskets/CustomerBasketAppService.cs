@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace eCommerceProject.CustomerBaskets
 {
-    public class CustomerBasketAppService : ICustomerBasketAppService
+    public class CustomerBasketAppService : eCommerceProjectAppServiceBase, ICustomerBasketAppService
     {
         private readonly ICustomerBasketRepository _basketRepository;
         private readonly IObjectMapper _mapper;
