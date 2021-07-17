@@ -17,6 +17,9 @@ import { ColorComponent } from './productColors/color/color.component';
 import { CustomerProductsComponent } from './customer-components/customer-products/customer-products.component';
 import { CustomerProductDetailsComponent } from './customer-components/customer-product-details/customer-product-details.component';
 import { CustomerAppComponent } from './customer-layout/customer-app/customer-app.component';
+import { CustomerBasketComponent } from './customer-components/customer-basket/customer-basket.component';
+import { CustomerFavoritesComponent } from './customer-components/customer-favorites/customer-favorites.component';
+import { CustomerProfileComponent } from './customer-components/customer-profile/customer-profile.component';
 
 
 @NgModule({
@@ -30,6 +33,9 @@ import { CustomerAppComponent } from './customer-layout/customer-app/customer-ap
                     { path: 'customerhome', component: CustomerHomeComponent },
                     { path: 'customerproducts', component: CustomerProductsComponent },
                     { path: 'detail/:productId', component: CustomerProductDetailsComponent },
+                    { path: 'customerbasket', component: CustomerBasketComponent },
+                    { path: 'customerfavorites', component: CustomerFavoritesComponent },
+                    { path: 'customerprofile', component: CustomerProfileComponent }
                 ]
             }
         ]),

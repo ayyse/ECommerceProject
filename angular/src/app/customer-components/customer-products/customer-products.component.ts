@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { CustomerBasketDto, BasketItemDto } from './../../../shared/service-proxies/service-proxies';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ProductBrandDto, ProductBrandServiceProxy, ProductColorDto, ProductColorServiceProxy, ProductDto, ProductServiceProxy, ProductTypeDto, ProductTypeServiceProxy } from '@shared/service-proxies/service-proxies';
+
 
 @Component({
   selector: 'app-customer-products',
@@ -17,6 +18,10 @@ export class CustomerProductsComponent implements OnInit {
   product: ProductDto = new ProductDto()
   type: ProductTypeDto = new ProductTypeDto()
 
+  item: BasketItemDto = new BasketItemDto()
+  basketList: BasketItemDto[] = []
+
+  @Output() changeClap = new EventEmitter();
 
   constructor(
     private productService: ProductServiceProxy,
@@ -29,6 +34,11 @@ export class CustomerProductsComponent implements OnInit {
     this.getAllBrands()
     this.getAllTypes()
     this.getAllColors()
+  }
+
+  addProductBasket(item: BasketItemDto) {
+    this.addToitem(item);
+    this.changeClap.emit();
   }
 
   getAllProducts() {
@@ -67,4 +77,17 @@ export class CustomerProductsComponent implements OnInit {
     })
   }
 
+  addToitem(item: BasketItemDto) {
+    var productContains = this.basketList.find(x => x.id == item.id)
+    if (productContains) {
+      productContains.product = this.product
+      productContains.quantity += 1
+      console.log("if", this.basketList)
+    }
+    else
+      this.item.product = this.product
+    this.item.quantity = 1
+    this.basketList.push(this.item)
+    console.log("else", this.basketList)
+  }
 }

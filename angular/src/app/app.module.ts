@@ -58,6 +58,9 @@ import { CustomerProductDetailsComponent } from './customer-components/customer-
 import { CustomerHeaderComponent } from './customer-layout/customer-header/customer-header.component';
 import { CustomerFooterComponent } from './customer-layout/customer-footer/customer-footer.component';
 import { CustomerAppComponent } from './customer-layout/customer-app/customer-app.component';
+import { CustomerBasketComponent } from './customer-components/customer-basket/customer-basket.component';
+import { CustomerProfileComponent } from './customer-components/customer-profile/customer-profile.component';
+import { CustomerFavoritesComponent } from './customer-components/customer-favorites/customer-favorites.component';
 
 @NgModule({
   declarations: [
@@ -106,6 +109,9 @@ import { CustomerAppComponent } from './customer-layout/customer-app/customer-ap
     CustomerHeaderComponent,
     CustomerFooterComponent,
     CustomerAppComponent,
+    CustomerBasketComponent,
+    CustomerProfileComponent,
+    CustomerFavoritesComponent,
     // customer layout
   ],
   imports: [
