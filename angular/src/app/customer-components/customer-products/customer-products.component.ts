@@ -1,6 +1,8 @@
-import { CustomerBasketDto, BasketItemDto } from './../../../shared/service-proxies/service-proxies';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { ProductBrandDto, ProductBrandServiceProxy, ProductColorDto, ProductColorServiceProxy, ProductDto, ProductServiceProxy, ProductTypeDto, ProductTypeServiceProxy } from '@shared/service-proxies/service-proxies';
+import { IProductDto } from './../../../shared/service-proxies/service-proxies';
+import { CustomerBasketService } from './../customer-basket/customer-basket.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { BasketItemDto, ProductBrandDto, ProductBrandServiceProxy, ProductColorDto, ProductColorServiceProxy, ProductDto, ProductServiceProxy, ProductTypeDto, ProductTypeServiceProxy, CustomerBasketServiceProxy } from '@shared/service-proxies/service-proxies';
+import { CustomerBasketComponent } from '../customer-basket/customer-basket.component';
 
 
 @Component({
@@ -14,20 +16,16 @@ export class CustomerProductsComponent implements OnInit {
   brands: ProductBrandDto[] = []
   types: ProductTypeDto[] = []
   colors: ProductColorDto[] = []
+  productId: number
 
-  product: ProductDto = new ProductDto()
-  type: ProductTypeDto = new ProductTypeDto()
-
-  item: BasketItemDto = new BasketItemDto()
-  basketList: BasketItemDto[] = []
-
-  @Output() changeClap = new EventEmitter();
+  @Input() product: IProductDto
 
   constructor(
     private productService: ProductServiceProxy,
     private brandService: ProductBrandServiceProxy,
     private typeService: ProductTypeServiceProxy,
-    private colorService: ProductColorServiceProxy) { }
+    private colorService: ProductColorServiceProxy,
+    private customerBasketService: CustomerBasketService) { }
 
   ngOnInit(): void {
     this.getAllProducts()
@@ -36,9 +34,15 @@ export class CustomerProductsComponent implements OnInit {
     this.getAllColors()
   }
 
-  addProductBasket(item: BasketItemDto) {
-    this.addToitem(item);
-    this.changeClap.emit();
+  getProduct() {
+    this.productService.getProduct(this.productId).subscribe(response => {
+      this.product = response
+    })
+  }
+
+  addToBasket() {
+    console.log(this.productId)
+    this.customerBasketService.addItemToBasket(this.product)
   }
 
   getAllProducts() {
@@ -77,17 +81,4 @@ export class CustomerProductsComponent implements OnInit {
     })
   }
 
-  addToitem(item: BasketItemDto) {
-    var productContains = this.basketList.find(x => x.id == item.id)
-    if (productContains) {
-      productContains.product = this.product
-      productContains.quantity += 1
-      console.log("if", this.basketList)
-    }
-    else
-      this.item.product = this.product
-    this.item.quantity = 1
-    this.basketList.push(this.item)
-    console.log("else", this.basketList)
-  }
 }
