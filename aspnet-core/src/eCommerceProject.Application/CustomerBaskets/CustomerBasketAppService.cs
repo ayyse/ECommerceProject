@@ -1,7 +1,10 @@
 ﻿using Abp.ObjectMapping;
+using eCommerceProject.BasketItems.Dto;
 using eCommerceProject.CustomerBaskets.Dto;
 using eCommerceProject.DbModels;
 using eCommerceProject.EntityFrameworkCore.Repositories;
+using eCommerceProject.Products.Dto;
+using System;
 using System.Threading.Tasks;
 
 namespace eCommerceProject.CustomerBaskets

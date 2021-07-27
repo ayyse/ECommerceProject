@@ -10,6 +10,6 @@ namespace eCommerceProject.CustomerBaskets.Dto
     [AutoMapTo(typeof(CustomerBasket))]
     public class CustomerBasketDto : EntityDto<string>
     {
-        public List<BasketItemDto> Items { get; set; } = new List<BasketItemDto>();
+        public List<BasketItemDto> Items { get; set; }
     }
 }

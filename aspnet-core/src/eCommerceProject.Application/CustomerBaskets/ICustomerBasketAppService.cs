@@ -1,4 +1,6 @@
-﻿using eCommerceProject.CustomerBaskets.Dto;
+﻿using eCommerceProject.BasketItems.Dto;
+using eCommerceProject.CustomerBaskets.Dto;
+using eCommerceProject.Products.Dto;
 using System.Threading.Tasks;
 
 namespace eCommerceProject.CustomerBaskets
@@ -7,8 +9,6 @@ namespace eCommerceProject.CustomerBaskets
     {
         public Task<CustomerBasketDto> GetBasketAsync(string basketId);
         public Task<CustomerBasketDto> UpdateAsync(CustomerBasketDto input);
-        //public Task<CustomerBasketDto> CreateAsync(CustomerBasketDto input);
         public Task DeleteAsync(string basketId);
-        //public Task<List<CustomerBasketDto>> GetAllProductsAsync();
     }
 }
