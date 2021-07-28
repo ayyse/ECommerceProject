@@ -1,7 +1,6 @@
-import { HttpClient } from '@angular/common/http';
-import { IBasketItemDto, ICustomerBasketDto, IProductDto, ProductDto, ProductServiceProxy } from './../../../shared/service-proxies/service-proxies';
+import { CustomerBasketDto, IBasketItemDto, ICustomerBasketDto, IProductDto, ProductDto, ProductServiceProxy } from './../../../shared/service-proxies/service-proxies';
 import { Injectable } from '@angular/core';
-import { BasketItemDto, CustomerBasketDto, CustomerBasketServiceProxy } from '@shared/service-proxies/service-proxies';
+import { CustomerBasketServiceProxy } from '@shared/service-proxies/service-proxies';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -13,44 +12,35 @@ export class CustomerBasketService {
   basket$ = this.basketSource.asObservable()
 
   product: ProductDto = new ProductDto()
+  basket: CustomerBasketDto = new CustomerBasketDto()
 
   productId: number
+  basketId: string
 
-  constructor(
-    private basketService: CustomerBasketServiceProxy,
-    private http: HttpClient,
-    private productService: ProductServiceProxy) { }
+  constructor(private basketService: CustomerBasketServiceProxy) { }
 
-  // getBasket() {
-  //   this.basketService.getBasket(this.basketId).subscribe(response => {
-  //     this.basketSource.next(this.basket)
-  //   })
-  // }
+  getBasket() {
+    this.basketService.getBasket(this.basketId).subscribe(response => {
+      this.basketSource.next(this.basket)
+    })
+  }
 
-  // setBasket(basket: ICustomerBasketDto) {
-  //   return this.http.post()
-  //   this.basketSource.next(basket)
-  //   console.log(basket)
-  // }
+  setBasket(basket: ICustomerBasketDto) {
+    return this.basketSource.next(basket)
+  }
 
   getCurrentBasketValue() {
     return this.basketSource.value
   }
 
-  getProduct() {
-    this.productService.getProduct(this.productId).subscribe(response => {
-      this.product = response
-    })
-  }
-
   addItemToBasket(item: IProductDto, quantity = 1) {
-    if (this.getProduct) {
+    if (item) {
       const itemToAdd: IBasketItemDto = this.mapProductItemToBasketItem(item, quantity)
-      const basket = this.getCurrentBasketValue() ?? this.createBasket()
+      const basket = this.getCurrentBasketValue() || this.createBasket()
       console.log('addItemToBasket=>', basket)
-      basket.items = this.addOrUpdateItem(basket.items, itemToAdd, quantity)
+      const items: IBasketItemDto[] = this.addOrUpdateItem(basket.items, itemToAdd, quantity)
+      this.setBasket(basket)
     }
-
   }
 
   private addOrUpdateItem(items: IBasketItemDto[], itemToAdd: IBasketItemDto, quantity: number): IBasketItemDto[] {
@@ -62,13 +52,22 @@ export class CustomerBasketService {
     else {
       items[index].quantity += quantity
     }
+    localStorage.setItem('basket', JSON.stringify(items))
+    console.log(JSON.parse(localStorage.getItem('basket')))
     return items
   }
 
   private createBasket(): ICustomerBasketDto {
-    const basket = new CustomerBasketDto()
-    localStorage.setItem('id', basket.id)
-    return basket
+    this.basketService.update(this.basket).subscribe(response => {
+      this.basket = response
+      console.log("BASKET", this.basket)
+    })
+    localStorage.setItem('basket', this.basket.id)
+    return this.basket
+    // const basket = new CustomerBasketDto({id: '1', items: []})
+    // localStorage.setItem('basket', JSON.stringify(basket))
+    // console.log(JSON.parse(localStorage.getItem('basket')))
+    // return basket
   }
 
   private mapProductItemToBasketItem(item: IProductDto, quantity: number): IBasketItemDto {

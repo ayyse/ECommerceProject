@@ -1,7 +1,7 @@
 import { IProductDto } from './../../../shared/service-proxies/service-proxies';
 import { CustomerBasketService } from './../customer-basket/customer-basket.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { BasketItemDto, ProductBrandDto, ProductBrandServiceProxy, ProductColorDto, ProductColorServiceProxy, ProductDto, ProductServiceProxy, ProductTypeDto, ProductTypeServiceProxy, CustomerBasketServiceProxy } from '@shared/service-proxies/service-proxies';
+import { ProductBrandDto, ProductBrandServiceProxy, ProductColorDto, ProductColorServiceProxy, ProductDto, ProductServiceProxy, ProductTypeDto, ProductTypeServiceProxy, CustomerBasketServiceProxy } from '@shared/service-proxies/service-proxies';
 import { CustomerBasketComponent } from '../customer-basket/customer-basket.component';
 
 
@@ -16,9 +16,8 @@ export class CustomerProductsComponent implements OnInit {
   brands: ProductBrandDto[] = []
   types: ProductTypeDto[] = []
   colors: ProductColorDto[] = []
-  productId: number
 
-  @Input() product: IProductDto
+  product: ProductDto = new ProductDto()
 
   constructor(
     private productService: ProductServiceProxy,
@@ -34,15 +33,9 @@ export class CustomerProductsComponent implements OnInit {
     this.getAllColors()
   }
 
-  getProduct() {
-    this.productService.getProduct(this.productId).subscribe(response => {
-      this.product = response
-    })
-  }
-
-  addToBasket() {
-    console.log(this.productId)
-    this.customerBasketService.addItemToBasket(this.product)
+  addToBasket(product: ProductDto) {
+    console.log("product", product)
+    this.customerBasketService.addItemToBasket(product)
   }
 
   getAllProducts() {

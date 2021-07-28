@@ -1,6 +1,4 @@
-﻿using eCommerceProject.BasketItems.Dto;
-using eCommerceProject.CustomerBaskets.Dto;
-using eCommerceProject.Products.Dto;
+﻿using eCommerceProject.CustomerBaskets.Dto;
 using System.Threading.Tasks;
 
 namespace eCommerceProject.CustomerBaskets

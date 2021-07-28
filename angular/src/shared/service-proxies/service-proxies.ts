@@ -374,62 +374,6 @@ export class CustomerBasketServiceProxy {
         }
         return _observableOf<CustomerBasketDto>(<any>null);
     }
-
-    /**
-     * @param body (optional)
-     * @return Success
-     */
-    productItemToBasketItemMapper(body: BasketItemDto | undefined): Observable<BasketItemDto> {
-        let url_ = this.baseUrl + "/api/services/app/CustomerBasket/ProductItemToBasketItemMapper";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(body);
-
-        let options_ : any = {
-            body: content_,
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-                "Content-Type": "application/json-patch+json",
-                "Accept": "text/plain"
-            })
-        };
-
-        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processProductItemToBasketItemMapper(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processProductItemToBasketItemMapper(<any>response_);
-                } catch (e) {
-                    return <Observable<BasketItemDto>><any>_observableThrow(e);
-                }
-            } else
-                return <Observable<BasketItemDto>><any>_observableThrow(response_);
-        }));
-    }
-
-    protected processProductItemToBasketItemMapper(response: HttpResponseBase): Observable<BasketItemDto> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = BasketItemDto.fromJS(resultData200);
-            return _observableOf(result200);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf<BasketItemDto>(<any>null);
-    }
 }
 
 @Injectable()
@@ -4301,7 +4245,7 @@ export class CustomerBasketDto implements ICustomerBasketDto {
 }
 
 export interface ICustomerBasketDto {
-    items: IBasketItemDto[] | undefined;
+    items: BasketItemDto[] | undefined;
     id: string | undefined;
 }
 
