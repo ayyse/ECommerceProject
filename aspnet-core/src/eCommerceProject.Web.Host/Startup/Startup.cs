@@ -59,12 +59,10 @@ namespace eCommerceProject.Web.Host.Startup
                 };
             });
 
-            services.AddSingleton<IConnectionMultiplexer>(x => {
-                var configuration = ConfigurationOptions.Parse(Configuration.GetConnectionString("Redis"), true);
-                return ConnectionMultiplexer.Connect(configuration);
-            });
-
-            services.AddScoped<ICustomerBasketRepository, CustomerBasketRepository>();
+            //services.AddSingleton<IConnectionMultiplexer>(x => {
+            //    var configuration = ConfigurationOptions.Parse(Configuration.GetConnectionString("Redis"), true);
+            //    return ConnectionMultiplexer.Connect(configuration);
+            //});
 
 
 
