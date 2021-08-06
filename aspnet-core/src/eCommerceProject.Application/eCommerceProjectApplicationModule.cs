@@ -2,6 +2,7 @@
 using Abp.Modules;
 using Abp.Reflection.Extensions;
 using eCommerceProject.Authorization;
+using System;
 
 namespace eCommerceProject
 {
@@ -13,6 +14,16 @@ namespace eCommerceProject
         public override void PreInitialize()
         {
             Configuration.Authorization.Providers.Add<eCommerceProjectAuthorizationProvider>();
+
+
+            // for basket configuration operation
+            Configuration.Caching.Configure("MyCache", cache =>
+            {
+                cache.DefaultSlidingExpireTime = TimeSpan.FromDays(30);
+            });
+
+           
+ 
         }
 
         public override void Initialize()
