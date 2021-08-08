@@ -17,7 +17,7 @@ namespace eCommerceProject.Products.Dto
         public int ProductBrandId { get; set; }
         public ProductBrandDto ProductBrandFk { get; set; }
 
-        public int? ProductColorId { get; set; }
+        public int ProductColorId { get; set; }
         public ProductColorDto ProductColorFk { get; set; }
 
 

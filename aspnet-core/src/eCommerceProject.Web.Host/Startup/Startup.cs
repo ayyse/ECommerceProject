@@ -1,26 +1,24 @@
-﻿using System;
-using System.Linq;
-using System.Reflection;
+﻿using Abp.AspNetCore;
+using Abp.AspNetCore.Mvc.Antiforgery;
+using Abp.AspNetCore.SignalR.Hubs;
+using Abp.Castle.Logging.Log4Net;
+using Abp.Dependency;
+using Abp.Extensions;
+using Abp.Json;
+using Castle.Facilities.Logging;
+using eCommerceProject.Configuration;
+using eCommerceProject.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Castle.Facilities.Logging;
-using Abp.AspNetCore;
-using Abp.AspNetCore.Mvc.Antiforgery;
-using Abp.Castle.Logging.Log4Net;
-using Abp.Extensions;
-using eCommerceProject.Configuration;
-using eCommerceProject.Identity;
-using Abp.AspNetCore.SignalR.Hubs;
-using Abp.Dependency;
-using Abp.Json;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
-using StackExchange.Redis;
-using eCommerceProject.EntityFrameworkCore.Repositories;
+using System;
+using System.Linq;
+using System.Reflection;
 
 namespace eCommerceProject.Web.Host.Startup
 {
@@ -58,11 +56,6 @@ namespace eCommerceProject.Web.Host.Startup
                     NamingStrategy = new CamelCaseNamingStrategy()
                 };
             });
-
-            //services.AddSingleton<IConnectionMultiplexer>(x => {
-            //    var configuration = ConfigurationOptions.Parse(Configuration.GetConnectionString("Redis"), true);
-            //    return ConnectionMultiplexer.Connect(configuration);
-            //});
 
 
 

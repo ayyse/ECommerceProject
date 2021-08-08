@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eCommerceProject.EntityFrameworkCore;
 
 namespace eCommerceProject.Migrations
 {
     [DbContext(typeof(eCommerceProjectDbContext))]
-    partial class eCommerceProjectDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210808093349_Removed_Product_Table_TenantId")]
+    partial class Removed_Product_Table_TenantId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1546,13 +1548,13 @@ namespace eCommerceProject.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("ProductBrandId")
+                    b.Property<int?>("ProductBrandFkId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProductColorId")
+                    b.Property<int?>("ProductColorFkId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProductTypeId")
+                    b.Property<int?>("ProductTypeFkId")
                         .HasColumnType("int");
 
                     b.Property<int>("Quantity")
@@ -1566,11 +1568,11 @@ namespace eCommerceProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductBrandId");
+                    b.HasIndex("ProductBrandFkId");
 
-                    b.HasIndex("ProductColorId");
+                    b.HasIndex("ProductColorFkId");
 
-                    b.HasIndex("ProductTypeId");
+                    b.HasIndex("ProductTypeFkId");
 
                     b.ToTable("BasketItems");
                 });
@@ -1639,7 +1641,7 @@ namespace eCommerceProject.Migrations
                     b.Property<int>("ProductBrandId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProductColorId")
+                    b.Property<int?>("ProductColorId")
                         .HasColumnType("int");
 
                     b.Property<int>("ProductTypeId")
@@ -1998,21 +2000,15 @@ namespace eCommerceProject.Migrations
                 {
                     b.HasOne("eCommerceProject.DbModels.ProductBrand", "ProductBrandFk")
                         .WithMany()
-                        .HasForeignKey("ProductBrandId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProductBrandFkId");
 
                     b.HasOne("eCommerceProject.DbModels.ProductColor", "ProductColorFk")
                         .WithMany()
-                        .HasForeignKey("ProductColorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProductColorFkId");
 
                     b.HasOne("eCommerceProject.DbModels.ProductType", "ProductTypeFk")
                         .WithMany()
-                        .HasForeignKey("ProductTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProductTypeFkId");
 
                     b.Navigation("ProductBrandFk");
 
@@ -2031,9 +2027,7 @@ namespace eCommerceProject.Migrations
 
                     b.HasOne("eCommerceProject.DbModels.ProductColor", "ProductColorFk")
                         .WithMany()
-                        .HasForeignKey("ProductColorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProductColorId");
 
                     b.HasOne("eCommerceProject.DbModels.ProductType", "ProductTypeFk")
                         .WithMany("Products")
