@@ -9,7 +9,7 @@ namespace eCommerceProject.BasketItems.Dto
 {
     [AutoMapFrom(typeof(BasketItem))]
     [AutoMapTo(typeof(BasketItem))]
-    public class BasketItemDto : EntityDto<int>
+    public class BasketItemDto : EntityDto<string>
     {
         public string Name { get; set; }
         public string Description { get; set; }
@@ -18,10 +18,13 @@ namespace eCommerceProject.BasketItems.Dto
         public decimal ShipmentPrice { get; set; }
         public int Quantity { get; set; }
 
+        public int ProductTypeId { get; set; }
         public ProductTypeDto ProductTypeFk { get; set; }
 
+        public int ProductBrandId { get; set; }
         public ProductBrandDto ProductBrandFk { get; set; }
 
+        public int ProductColorId { get; set; }
         public ProductColorDto ProductColorFk { get; set; }
 
     }

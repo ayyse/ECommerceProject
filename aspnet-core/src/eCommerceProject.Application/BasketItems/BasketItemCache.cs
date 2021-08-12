@@ -13,11 +13,11 @@ using System.Threading.Tasks;
 
 namespace eCommerceProject.BasketItems
 {
-    public class BasketItemCache : MayHaveTenantEntityCache<BasketItem, BasketItemDto>, IBasketItemCache, ITransientDependency
+    public class BasketItemCache : MayHaveTenantEntityCache<BasketItem, BasketItemDto, string>, IBasketItemCache, ITransientDependency
     {
         private readonly ICacheManager _cacheManager;
-        private readonly IRepository<BasketItem> _repository;
-        public BasketItemCache(ICacheManager cacheManager, IUnitOfWorkManager unitOfWorkManager, IRepository<BasketItem> repository)
+        private readonly IRepository<BasketItem, string> _repository;
+        public BasketItemCache(ICacheManager cacheManager, IUnitOfWorkManager unitOfWorkManager, IRepository<BasketItem, string> repository)
         : base(cacheManager, unitOfWorkManager, repository)
         {
             _cacheManager = cacheManager;

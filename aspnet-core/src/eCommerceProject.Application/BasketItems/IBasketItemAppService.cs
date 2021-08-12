@@ -8,7 +8,11 @@ using System.Threading.Tasks;
 
 namespace eCommerceProject.BasketItems
 {
-    public interface IBasketItemAppService : IAsyncCrudAppService<BasketItemDto, int>
+    public interface IBasketItemAppService : IAsyncCrudAppService<BasketItemDto, string>
     {
+        public BasketItemDto GetItem(string id);
+        public BasketItemDto GetFromDatabase(string id);
+        public Task<BasketItemDto> AddOrUpdateToBasketAsync(BasketItemDto input, int id);
+        public Task<int> BasketCountAsync();
     }
 }
