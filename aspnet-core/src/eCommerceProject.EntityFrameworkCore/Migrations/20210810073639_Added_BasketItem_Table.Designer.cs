@@ -10,7 +10,7 @@ using eCommerceProject.EntityFrameworkCore;
 namespace eCommerceProject.Migrations
 {
     [DbContext(typeof(eCommerceProjectDbContext))]
-    [Migration("20210804104744_Added_BasketItem_Table")]
+    [Migration("20210810073639_Added_BasketItem_Table")]
     partial class Added_BasketItem_Table
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -1531,10 +1531,8 @@ namespace eCommerceProject.Migrations
 
             modelBuilder.Entity("eCommerceProject.DbModels.BasketItem", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -1548,13 +1546,13 @@ namespace eCommerceProject.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("ProductBrandFkId")
+                    b.Property<int>("ProductBrandId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ProductColorFkId")
+                    b.Property<int>("ProductColorId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ProductTypeFkId")
+                    b.Property<int>("ProductTypeId")
                         .HasColumnType("int");
 
                     b.Property<int>("Quantity")
@@ -1568,11 +1566,11 @@ namespace eCommerceProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductBrandFkId");
+                    b.HasIndex("ProductBrandId");
 
-                    b.HasIndex("ProductColorFkId");
+                    b.HasIndex("ProductColorId");
 
-                    b.HasIndex("ProductTypeFkId");
+                    b.HasIndex("ProductTypeId");
 
                     b.ToTable("BasketItems");
                 });
@@ -1641,7 +1639,7 @@ namespace eCommerceProject.Migrations
                     b.Property<int>("ProductBrandId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ProductColorId")
+                    b.Property<int>("ProductColorId")
                         .HasColumnType("int");
 
                     b.Property<int>("ProductTypeId")
@@ -2000,15 +1998,21 @@ namespace eCommerceProject.Migrations
                 {
                     b.HasOne("eCommerceProject.DbModels.ProductBrand", "ProductBrandFk")
                         .WithMany()
-                        .HasForeignKey("ProductBrandFkId");
+                        .HasForeignKey("ProductBrandId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("eCommerceProject.DbModels.ProductColor", "ProductColorFk")
                         .WithMany()
-                        .HasForeignKey("ProductColorFkId");
+                        .HasForeignKey("ProductColorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("eCommerceProject.DbModels.ProductType", "ProductTypeFk")
                         .WithMany()
-                        .HasForeignKey("ProductTypeFkId");
+                        .HasForeignKey("ProductTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("ProductBrandFk");
 
@@ -2027,7 +2031,9 @@ namespace eCommerceProject.Migrations
 
                     b.HasOne("eCommerceProject.DbModels.ProductColor", "ProductColorFk")
                         .WithMany()
-                        .HasForeignKey("ProductColorId");
+                        .HasForeignKey("ProductColorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("eCommerceProject.DbModels.ProductType", "ProductTypeFk")
                         .WithMany("Products")

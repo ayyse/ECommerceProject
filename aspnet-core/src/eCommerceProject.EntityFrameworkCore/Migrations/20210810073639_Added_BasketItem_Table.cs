@@ -10,56 +10,55 @@ namespace eCommerceProject.Migrations
                 name: "BasketItems",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     TenantId = table.Column<int>(type: "int", nullable: true),
+                    ProductTypeId = table.Column<int>(type: "int", nullable: false),
+                    ProductBrandId = table.Column<int>(type: "int", nullable: false),
+                    ProductColorId = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ShipmentPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
-                    ProductTypeFkId = table.Column<int>(type: "int", nullable: true),
-                    ProductBrandFkId = table.Column<int>(type: "int", nullable: true),
-                    ProductColorFkId = table.Column<int>(type: "int", nullable: true)
+                    Quantity = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_BasketItems", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_BasketItems_ProductBrands_ProductBrandFkId",
-                        column: x => x.ProductBrandFkId,
+                        name: "FK_BasketItems_ProductBrands_ProductBrandId",
+                        column: x => x.ProductBrandId,
                         principalTable: "ProductBrands",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_BasketItems_ProductColors_ProductColorFkId",
-                        column: x => x.ProductColorFkId,
+                        name: "FK_BasketItems_ProductColors_ProductColorId",
+                        column: x => x.ProductColorId,
                         principalTable: "ProductColors",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_BasketItems_ProductTypes_ProductTypeFkId",
-                        column: x => x.ProductTypeFkId,
+                        name: "FK_BasketItems_ProductTypes_ProductTypeId",
+                        column: x => x.ProductTypeId,
                         principalTable: "ProductTypes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_BasketItems_ProductBrandFkId",
+                name: "IX_BasketItems_ProductBrandId",
                 table: "BasketItems",
-                column: "ProductBrandFkId");
+                column: "ProductBrandId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BasketItems_ProductColorFkId",
+                name: "IX_BasketItems_ProductColorId",
                 table: "BasketItems",
-                column: "ProductColorFkId");
+                column: "ProductColorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BasketItems_ProductTypeFkId",
+                name: "IX_BasketItems_ProductTypeId",
                 table: "BasketItems",
-                column: "ProductTypeFkId");
+                column: "ProductTypeId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

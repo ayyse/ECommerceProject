@@ -2,7 +2,7 @@
 
 namespace eCommerceProject.DbModels
 {
-    public class BasketItem : Entity<int>, IMayHaveTenant
+    public class BasketItem : Entity<string>, IMayHaveTenant
     {
         public int? TenantId { get; set; }
 
