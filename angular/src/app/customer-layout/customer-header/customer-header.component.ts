@@ -1,4 +1,6 @@
+import { BasketItemServiceProxy } from './../../../shared/service-proxies/service-proxies';
 import { Component, OnInit } from '@angular/core';
+import { BasketItemDto } from '@shared/service-proxies/service-proxies';
 
 @Component({
   selector: 'app-customer-header',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CustomerHeaderComponent implements OnInit {
 
-  constructor() { }
+  basketCount: number
+
+
+  constructor(private basketService: BasketItemServiceProxy) {
+    this.basketService.basketCount().subscribe(
+      (count: number) => this.basketCount = count
+    );
+  }
 
   ngOnInit(): void {
   }
+
+
 
 }

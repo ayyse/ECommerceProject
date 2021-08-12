@@ -18,9 +18,9 @@
                             <tr *ngFor="let item of basketList">
                                 <td>
                                     <figure class="itemside">
-                                        <div class="aside"><img [src]="item?.product?.imageUrl" class="img-sm"></div>
+                                        <div class="aside"><img [src]="item?.imageUrl" class="img-sm"></div>
                                         <figcaption class="info">
-                                            <a href="#" class="title text-dark">{{ item?.product?.name }}</a>
+                                            <a href="#" class="title text-dark">{{ item?.name }}</a>
                                             <p class="text-muted small">Size: XL, Color: blue, <br> Brand: Gucci</p>
                                         </figcaption>
                                     </figure>

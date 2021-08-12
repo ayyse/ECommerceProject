@@ -1,8 +1,6 @@
-import { IProductDto } from './../../../shared/service-proxies/service-proxies';
-import { CustomerBasketService } from './../customer-basket/customer-basket.service';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ProductBrandDto, ProductBrandServiceProxy, ProductColorDto, ProductColorServiceProxy, ProductDto, ProductServiceProxy, ProductTypeDto, ProductTypeServiceProxy, CustomerBasketServiceProxy } from '@shared/service-proxies/service-proxies';
-import { CustomerBasketComponent } from '../customer-basket/customer-basket.component';
+import { BasketItemDto, BasketItemServiceProxy } from './../../../shared/service-proxies/service-proxies';
+import { Component, EventEmitter, OnInit } from '@angular/core';
+import { ProductBrandDto, ProductBrandServiceProxy, ProductColorDto, ProductColorServiceProxy, ProductDto, ProductServiceProxy, ProductTypeDto, ProductTypeServiceProxy } from '@shared/service-proxies/service-proxies';
 
 
 @Component({
@@ -18,13 +16,18 @@ export class CustomerProductsComponent implements OnInit {
   colors: ProductColorDto[] = []
 
   product: ProductDto = new ProductDto()
+  item: BasketItemDto = new BasketItemDto()
+  id: number
+
+
+  basketList: BasketItemDto[] = []
 
   constructor(
     private productService: ProductServiceProxy,
     private brandService: ProductBrandServiceProxy,
     private typeService: ProductTypeServiceProxy,
     private colorService: ProductColorServiceProxy,
-    private customerBasketService: CustomerBasketService) { }
+    private basketService: BasketItemServiceProxy) { }
 
   ngOnInit(): void {
     this.getAllProducts()
@@ -34,9 +37,11 @@ export class CustomerProductsComponent implements OnInit {
   }
 
   addToBasket(product: ProductDto) {
-    console.log("product", product)
-    this.customerBasketService.addItemToBasket(product)
+    this.basketService.addOrUpdateToBasket(product.id, this.item).subscribe(response => {
+      this.item = response
+    })
   }
+
 
   getAllProducts() {
     this.productService.getAllProducts().subscribe(response => {
