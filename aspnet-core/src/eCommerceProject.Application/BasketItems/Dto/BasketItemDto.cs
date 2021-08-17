@@ -9,7 +9,7 @@ namespace eCommerceProject.BasketItems.Dto
 {
     [AutoMapFrom(typeof(BasketItem))]
     [AutoMapTo(typeof(BasketItem))]
-    public class BasketItemDto : EntityDto<string>
+    public class BasketItemDto : EntityDto<int>
     {
         public string Name { get; set; }
         public string Description { get; set; }

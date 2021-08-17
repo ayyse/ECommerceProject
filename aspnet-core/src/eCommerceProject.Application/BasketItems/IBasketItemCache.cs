@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace eCommerceProject.BasketItems
 {
-    public interface IBasketItemCache : IMultiTenancyEntityCache<BasketItemDto, string>
+    public interface IBasketItemCache : IMultiTenancyEntityCache<BasketItemDto, int>
     {
     }
 }

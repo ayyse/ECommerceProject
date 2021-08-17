@@ -7,22 +7,23 @@ using eCommerceProject.BasketItems.Dto;
 using eCommerceProject.DbModels;
 using eCommerceProject.Products.Dto;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace eCommerceProject.BasketItems
 {
-    public class BasketItemAppService : AsyncCrudAppService<BasketItem, BasketItemDto, string>, IBasketItemAppService, ITransientDependency
+    public class BasketItemAppService : AsyncCrudAppService<BasketItem, BasketItemDto, int>, IBasketItemAppService, ITransientDependency
     {
 
         private readonly IBasketItemCache _basketCache;
         private readonly ICacheManager _cacheManager;
-        private readonly IRepository<BasketItem, string> _basketRepository;
+        private readonly IRepository<BasketItem, int> _basketRepository;
         private readonly IRepository<Product, int> _productRepository;
         private readonly IObjectMapper _mapper;
 
         public BasketItemAppService(
-            IRepository<BasketItem, string> basketRepository,
+            IRepository<BasketItem, int> basketRepository,
             IRepository<Product, int> productRepository,
             IBasketItemCache basketCache, 
             ICacheManager cacheManager, 
@@ -36,15 +37,15 @@ namespace eCommerceProject.BasketItems
             _mapper = mapper;
         }
 
-        public BasketItemDto GetItem(string id)
+        public List<BasketItemDto> GetItem(int id)
         {
             //Try to get from cache
             return _cacheManager
                 .GetCache("MyCache")
-                .Get(id.ToString(), factory => GetFromDatabase(id)) as BasketItemDto;
+                .Get(id.ToString(), factory => GetFromDatabase(id)) as List<BasketItemDto>;
         }
 
-        public BasketItemDto GetFromDatabase(string id)
+        public BasketItemDto GetFromDatabase(int id)
         {
             return _basketCache.Get(id);
         }
@@ -54,7 +55,6 @@ namespace eCommerceProject.BasketItems
         {
             var selectedProduct = _productRepository.FirstOrDefault(x => x.Id == id);
 
-            input.Id = Guid.NewGuid().ToString();
             input.Name = selectedProduct.Name;
             input.Description = selectedProduct.Description;
             input.ImageUrl = selectedProduct.ImageUrl;
@@ -69,8 +69,6 @@ namespace eCommerceProject.BasketItems
             var addItemToBasket = await _basketRepository.InsertAsync(addedItem);
             await CurrentUnitOfWork.SaveChangesAsync();
             return _mapper.Map<BasketItemDto>(addItemToBasket);
-
-
         }
 
         public async Task<int> BasketCountAsync()
