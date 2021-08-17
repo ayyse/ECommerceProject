@@ -1529,8 +1529,10 @@ namespace eCommerceProject.Migrations
 
             modelBuilder.Entity("eCommerceProject.DbModels.BasketItem", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
