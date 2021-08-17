@@ -14,5 +14,6 @@ namespace eCommerceProject.Products
         public Task<ProductDto> GetProductAsync(int productId);
         public Task<List<ProductDto>> GetAllProductsByBrandAsync(int brandId);
         public Task<List<ProductDto>> GetAllProductsByTypeAsync(int typeId);
+        public Task<List<ProductDto>> GetAllProductsByColorAsync(int colorId);
     }
 }

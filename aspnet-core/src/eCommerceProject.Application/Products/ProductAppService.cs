@@ -78,5 +78,11 @@ namespace eCommerceProject.Products
             var productsByType = await _productRepository.GetAll().Where(x => x.ProductTypeId == typeId).ToListAsync();
             return _mapper.Map<List<ProductDto>>(productsByType);
         }
+
+        public async Task<List<ProductDto>> GetAllProductsByColorAsync(int colorId)
+        {
+            var productsByColor = await _productRepository.GetAll().Where(x => x.ProductColorId == colorId).ToListAsync();
+            return _mapper.Map<List<ProductDto>>(productsByColor);
+        }
     }
 }
