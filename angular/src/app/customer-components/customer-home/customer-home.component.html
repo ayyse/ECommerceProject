@@ -2,7 +2,7 @@
     <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon">
 </head>
 
-<section class="section-intro">
+<section class="section-intro" style="margin-left:100px; margin-right: 100px;">
 
     <div class="intro-banner-wrap">
         <img src="https://cdn.dsmcdn.com/ty144/pimWidgetApi/webBig_20210712084344_akilliceptel100621web1.jpg"
@@ -16,43 +16,34 @@
         <div class="row" style="margin-top: 30px; margin-bottom: 30px;">
             <div class="col-md-4">
                 <figure class="itemside">
-                    <div class="aside">
-                        <span class="icon-sm rounded-circle bg-primary">
-                            <i class="fa fa-money-bill-alt white"></i>
-                        </span>
+                    <div class="aside" align="center">
+                        <img src="https://media.istockphoto.com/vectors/cashback-return-money-cash-back-rebate-line-icon-salary-exchange-hand-vector-id1270225962?b=1&k=6&m=1270225962&s=170667a&w=0&h=aDGjobl5MIRdw5_CdN1p_OIdRUfwBl1NxdHXLY182V8="
+                        style="width:200px;height: 200px">
                     </div>
                     <figcaption class="info">
-                        <h6 class="title">Reasonable prices</h6>
-                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                            tempor incididunt ut labor </p>
+                        <h6 class="title" align="center">REASONABLE PRICES</h6>
                     </figcaption>
                 </figure> <!-- iconbox // -->
             </div>
             <div class="col-md-4">
                 <figure class="itemside">
-                    <div class="aside">
-                        <span class="icon-sm rounded-circle bg-danger">
-                            <i class="fa fa-comment-dots white"></i>
-                        </span>
+                    <div class="aside"align="center">
+                        <img src="https://media.istockphoto.com/vectors/hours-phone-support-line-icon-editable-stroke-pixel-perfect-for-and-vector-id1136261350?b=1&k=6&m=1136261350&s=170667a&w=0&h=IN9Ax3bj8N0__B-Lh1KqAE7tv_ixC8SvgXVAWVq4tGs="
+                        style="width:200px;height: 200px">
                     </div>
                     <figcaption class="info">
-                        <h6 class="title">Customer support 24/7 </h6>
-                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                            tempor incididunt ut labor </p>
+                        <h6 class="title" align="center">CUSTOMER SUPPORT 24/7 </h6>
                     </figcaption>
                 </figure> <!-- iconbox // -->
             </div>
             <div class="col-md-4">
                 <figure class="itemside">
-                    <div class="aside">
-                        <span class="icon-sm rounded-circle bg-success">
-                            <i class="fa fa-truck white"></i>
-                        </span>
+                    <div class="aside" align="center">
+                        <img src="https://media.istockphoto.com/vectors/fast-shipping-delivery-truck-line-icon-design-vector-illustration-for-vector-id1186665850?b=1&k=6&m=1186665850&s=170667a&w=0&h=12aUqd07TMSOljI2hU93kJenayGB7ou_DcmY4bsBn94="
+                        style="width:200px;height: 200px">
                     </div>
                     <figcaption class="info">
-                        <h6 class="title">Quick delivery</h6>
-                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                            tempor incididunt ut labor </p>
+                        <h6 class="title" align="center">QUICK DELIVERY</h6>
                     </figcaption>
                 </figure> <!-- iconbox // -->
             </div>
@@ -62,12 +53,12 @@
 </section>
 
 
-<div class="row" style="margin-left: 300px;">
+<div class="row" style="margin-left: 300px; margin-top: 20px;">
     <div class="col-md-3" *ngFor="let type of types" [routerLink]="['/app/customerproducts']">
         <div class="card card-product-grid" align="center" route>
             <a class="img-wrap"> <img [src]="type?.imageUrl" alt="..."> </a>
             <figcaption class="info-wrap">
-                <div class="title" style="padding: 15px;" align="center" > <b>{{ type?.name }}</b> {{ type?.description }} </div>
+                <div class="title" style="padding: 15px;" align="center"> <b>{{ type?.name }}</b> {{ type?.description }} </div>
             </figcaption>
         </div>
     </div>

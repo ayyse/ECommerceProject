@@ -1,6 +1,5 @@
-import { BasketItemServiceProxy } from './../../../shared/service-proxies/service-proxies';
+import { ProductDto, ProductServiceProxy } from './../../../shared/service-proxies/service-proxies';
 import { Component, OnInit } from '@angular/core';
-import { BasketItemDto } from '@shared/service-proxies/service-proxies';
 
 @Component({
   selector: 'app-customer-header',
@@ -9,18 +8,26 @@ import { BasketItemDto } from '@shared/service-proxies/service-proxies';
 })
 export class CustomerHeaderComponent implements OnInit {
 
-  basketCount: number
+  productName = ''
+  products = []
+  product: ProductDto
+  states: any
 
-
-  constructor(private basketService: BasketItemServiceProxy) {
-    this.basketService.basketCount().subscribe(
-      (count: number) => this.basketCount = count
-    );
+  constructor(private productService: ProductServiceProxy) {
   }
 
   ngOnInit(): void {
+
   }
 
-
-
+  searchButton(){
+    this.productService.get(this.product.id).subscribe(response => {
+      if(response){
+        this.states = Object.entries(response);
+        this.states.forEach((state) => {
+          state[1].forEach(product => this.products.push(product + ', ' + state[0]));
+        })
+      }
+    })
+  }
 }

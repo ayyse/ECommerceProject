@@ -1,5 +1,5 @@
-import { BasketItemDto, BasketItemServiceProxy } from './../../../shared/service-proxies/service-proxies';
-import { Component, EventEmitter, OnInit } from '@angular/core';
+import { BasketItemDto, BasketItemServiceProxy, FavoriteDto, FavoriteServiceProxy } from './../../../shared/service-proxies/service-proxies';
+import { Component, OnInit } from '@angular/core';
 import { ProductBrandDto, ProductBrandServiceProxy, ProductColorDto, ProductColorServiceProxy, ProductDto, ProductServiceProxy, ProductTypeDto, ProductTypeServiceProxy } from '@shared/service-proxies/service-proxies';
 
 
@@ -17,6 +17,7 @@ export class CustomerProductsComponent implements OnInit {
 
   product: ProductDto = new ProductDto()
   item: BasketItemDto = new BasketItemDto()
+  fav: FavoriteDto = new FavoriteDto()
   id: number
 
 
@@ -27,7 +28,8 @@ export class CustomerProductsComponent implements OnInit {
     private brandService: ProductBrandServiceProxy,
     private typeService: ProductTypeServiceProxy,
     private colorService: ProductColorServiceProxy,
-    private basketService: BasketItemServiceProxy) { }
+    private basketService: BasketItemServiceProxy,
+    private favoriteService: FavoriteServiceProxy) { }
 
   ngOnInit(): void {
     this.getAllProducts()
@@ -42,6 +44,11 @@ export class CustomerProductsComponent implements OnInit {
     })
   }
 
+  addToFavorite(product: ProductDto) {
+    this.favoriteService.addFavorite(product.id, this.fav).subscribe(response => {
+      this.fav = response
+    })
+  }
 
   getAllProducts() {
     this.productService.getAllProducts().subscribe(response => {
@@ -79,4 +86,9 @@ export class CustomerProductsComponent implements OnInit {
     })
   }
 
+  getAllProductsByColorId(productColorId: number) {
+    this.productService.getAllProductsByColor(productColorId).subscribe(response => {
+      this.products = response
+    })
+  }
 }

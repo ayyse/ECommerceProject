@@ -61,6 +61,7 @@ import { CustomerAppComponent } from './customer-layout/customer-app/customer-ap
 import { CustomerBasketComponent } from './customer-components/customer-basket/customer-basket.component';
 import { CustomerProfileComponent } from './customer-components/customer-profile/customer-profile.component';
 import { CustomerFavoritesComponent } from './customer-components/customer-favorites/customer-favorites.component';
+import { FilterPipe } from './pipes/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -106,13 +107,15 @@ import { CustomerFavoritesComponent } from './customer-components/customer-favor
     CustomerHomeComponent,
     CustomerProductsComponent,
     CustomerProductDetailsComponent,
-    CustomerHeaderComponent,
-    CustomerFooterComponent,
-    CustomerAppComponent,
     CustomerBasketComponent,
     CustomerProfileComponent,
     CustomerFavoritesComponent,
     // customer layout
+    CustomerHeaderComponent,
+    CustomerFooterComponent,
+    CustomerAppComponent,
+    // pipes
+    FilterPipe,
   ],
   imports: [
     CommonModule,

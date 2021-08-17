@@ -22,50 +22,54 @@
                         <a class="nav-link" (click)="getAllProductsByTypeId(type.id)"> {{ type?.name }} </a>
                     </li>
                 </ul>
-            </div> <!-- collapse .// -->
-        </div> <!-- container .// -->
+            </div>
+        </div>
     </nav>
 
     <div class="row">
         <div class="col-md-2">
             <div class="nav flex-column nav-pills" aria-orientation="vertical"
                 style="margin-top: 100px; margin-left: 40px;">
+
+
+
                 <div class="card">
-                    <article class="filter-group">
-                        <header class="card-header">
-                            <a href="#" data-toggle="collapse" data-target="#collapse_2" aria-expanded="true" class="">
-                                <h6 class="title">Product Brands</h6>
-                            </a>
-                        </header>
-                        <div class="filter-content collapse show" id="collapse_2">
-                            <div class="card-body">
-                                <label class="custom-control custom-checkbox" *ngFor="let brand of brands">
-                                    <input type="checkbox" checked="" class="custom-control-input">
-                                    <div class="custom-control-label"> {{ brand?.name }}
-                                        <b class="badge badge-pill badge-light float-right">120</b>
-                                    </div>
-                                </label>
+                    <a class="nav-link active" aria-selected="true" (click)="getAllProducts()">Get All Products</a>
+                    <a class="nav-link" aria-selected="false" *ngFor="let brand of brands"
+                        (click)="getAllProductsByBrandId(brand.id)">{{ brand?.name}}</a>
+                    <!-- <article class="filter-group">
+                            <header class="card-header">
+                                <a href="#" data-toggle="collapse" data-target="#collapse_2" aria-expanded="true" class="">
+                                    <h6 class="title">Product Brands</h6>
+                                </a>
+                            </header>
+                            <div class="filter-content collapse show" id="collapse_2">
+                                <div class="card-body">
+                                    <label class="custom-control custom-checkbox" *ngFor="let brand of brands">
+                                        <input type="checkbox" checked="" class="custom-control-input">
+                                        <div class="custom-control-label"> {{ brand?.name }}
+                                            <b class="badge badge-pill badge-light float-right">120</b>
+                                        </div>
+                                    </label>
+                                </div>
                             </div>
-                        </div>
-                    </article>
+                        </article> -->
                     <article class="filter-group">
                         <header class="card-header">
-                            <a href="#" data-toggle="collapse" data-target="#collapse_4" aria-expanded="true" class="">
-                                <h6 class="title">Colors </h6>
+                            <a class="nav-link active" data-toggle="collapse" data-target="#collapse_4" aria-expanded="true" class="">
+
                             </a>
                         </header>
                         <div class="filter-content collapse show" id="collapse_4">
                             <div class="card-body">
                                 <label class="checkbox-btn" *ngFor="let color of colors">
-                                    <span class="btn btn-light"> {{ color?.name }} </span>
+                                    <span class="btn btn-light" (click)="getAllProductsByColorId(color.id)" style="margin-right: 5px;">
+                                        {{ color?.name }} </span>
                                 </label>
                             </div>
                         </div>
                     </article>
                 </div>
-                <a class="nav-link active" aria-selected="true" (click)="getAllProducts()">Get All Products</a>
-                <a class="nav-link" aria-selected="false" *ngFor="let brand of brands"
-                    (click)="getAllProductsByBrandId(brand.id)">{{ brand?.name}}</a>
             </div>
         </div>
         <div class="col-md-10">
@@ -85,8 +89,9 @@
                                     <div class="text-center">
                                         <a class="btn btn-outline-dark mt-auto" style="margin-right: 5px;"
                                             [routerLink]="['/app/detail', product.id]">Detail</a>
-                                        <a class="btn btn-outline-dark mt-auto" (click)="addToBasket(product)">Basket</a>
-                                        <a class="btn btn-outline-dark mt-auto" [routerLink]="['/app/customerfavorites']" >Fav</a>
+                                        <a class="btn btn-outline-dark mt-auto" (click)="addToBasket(product)"
+                                            style="margin-right: 5px;">Basket</a>
+                                        <a class="btn btn-outline-dark mt-auto" (click)="addToFavorite(product)">Fav</a>
                                     </div>
                                 </div>
                             </div>

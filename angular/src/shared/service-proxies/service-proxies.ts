@@ -155,7 +155,7 @@ export class BasketItemServiceProxy {
      * @param id (optional) 
      * @return Success
      */
-    getItem(id: string | null | undefined): Observable<BasketItemDto> {
+    getItem(id: string | null | undefined): Observable<BasketItemDto[]> {
         let url_ = this.baseUrl + "/api/services/app/BasketItem/GetItem?";
         if (id !== undefined && id !== null)
             url_ += "id=" + encodeURIComponent("" + id) + "&";
@@ -176,14 +176,14 @@ export class BasketItemServiceProxy {
                 try {
                     return this.processGetItem(<any>response_);
                 } catch (e) {
-                    return <Observable<BasketItemDto>><any>_observableThrow(e);
+                    return <Observable<BasketItemDto[]>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<BasketItemDto>><any>_observableThrow(response_);
+                return <Observable<BasketItemDto[]>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetItem(response: HttpResponseBase): Observable<BasketItemDto> {
+    protected processGetItem(response: HttpResponseBase): Observable<BasketItemDto[]> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -194,7 +194,14 @@ export class BasketItemServiceProxy {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = BasketItemDto.fromJS(resultData200);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200.push(BasketItemDto.fromJS(item));
+            }
+            else {
+                result200 = <any>null;
+            }
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -202,7 +209,7 @@ export class BasketItemServiceProxy {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<BasketItemDto>(<any>null);
+        return _observableOf<BasketItemDto[]>(<any>null);
     }
 
     /**
@@ -730,8 +737,8 @@ export class FavoriteServiceProxy {
     /**
      * @return Success
      */
-    getAllProducts(): Observable<FavoriteDto[]> {
-        let url_ = this.baseUrl + "/api/services/app/Favorite/GetAllProducts";
+    getAllFavorites(): Observable<FavoriteDto[]> {
+        let url_ = this.baseUrl + "/api/services/app/Favorite/GetAllFavorites";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -743,11 +750,11 @@ export class FavoriteServiceProxy {
         };
 
         return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processGetAllProducts(response_);
+            return this.processGetAllFavorites(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processGetAllProducts(<any>response_);
+                    return this.processGetAllFavorites(<any>response_);
                 } catch (e) {
                     return <Observable<FavoriteDto[]>><any>_observableThrow(e);
                 }
@@ -756,7 +763,7 @@ export class FavoriteServiceProxy {
         }));
     }
 
-    protected processGetAllProducts(response: HttpResponseBase): Observable<FavoriteDto[]> {
+    protected processGetAllFavorites(response: HttpResponseBase): Observable<FavoriteDto[]> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -787,13 +794,126 @@ export class FavoriteServiceProxy {
 
     /**
      * @param id (optional) 
+     * @param body (optional) 
      * @return Success
      */
-    get(id: number | undefined): Observable<FavoriteDto> {
-        let url_ = this.baseUrl + "/api/services/app/Favorite/Get?";
+    addFavorite(id: number | undefined, body: FavoriteDto | undefined): Observable<FavoriteDto> {
+        let url_ = this.baseUrl + "/api/services/app/Favorite/AddFavorite?";
         if (id === null)
             throw new Error("The parameter 'id' cannot be null.");
         else if (id !== undefined)
+            url_ += "id=" + encodeURIComponent("" + id) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processAddFavorite(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processAddFavorite(<any>response_);
+                } catch (e) {
+                    return <Observable<FavoriteDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<FavoriteDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processAddFavorite(response: HttpResponseBase): Observable<FavoriteDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = FavoriteDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<FavoriteDto>(<any>null);
+    }
+
+    /**
+     * @param favId (optional) 
+     * @return Success
+     */
+    getFavorite(favId: string | null | undefined): Observable<FavoriteDto> {
+        let url_ = this.baseUrl + "/api/services/app/Favorite/GetFavorite?";
+        if (favId !== undefined && favId !== null)
+            url_ += "favId=" + encodeURIComponent("" + favId) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetFavorite(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetFavorite(<any>response_);
+                } catch (e) {
+                    return <Observable<FavoriteDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<FavoriteDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetFavorite(response: HttpResponseBase): Observable<FavoriteDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = FavoriteDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<FavoriteDto>(<any>null);
+    }
+
+    /**
+     * @param id (optional) 
+     * @return Success
+     */
+    get(id: string | null | undefined): Observable<FavoriteDto> {
+        let url_ = this.baseUrl + "/api/services/app/Favorite/Get?";
+        if (id !== undefined && id !== null)
             url_ += "Id=" + encodeURIComponent("" + id) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -1021,11 +1141,9 @@ export class FavoriteServiceProxy {
      * @param id (optional) 
      * @return Success
      */
-    delete(id: number | undefined): Observable<void> {
+    delete(id: string | null | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Favorite/Delete?";
-        if (id === null)
-            throw new Error("The parameter 'id' cannot be null.");
-        else if (id !== undefined)
+        if (id !== undefined && id !== null)
             url_ += "Id=" + encodeURIComponent("" + id) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -1457,6 +1575,69 @@ export class ProductServiceProxy {
     }
 
     protected processGetAllProductsByType(response: HttpResponseBase): Observable<ProductDto[]> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200.push(ProductDto.fromJS(item));
+            }
+            else {
+                result200 = <any>null;
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ProductDto[]>(<any>null);
+    }
+
+    /**
+     * @param colorId (optional) 
+     * @return Success
+     */
+    getAllProductsByColor(colorId: number | undefined): Observable<ProductDto[]> {
+        let url_ = this.baseUrl + "/api/services/app/Product/GetAllProductsByColor?";
+        if (colorId === null)
+            throw new Error("The parameter 'colorId' cannot be null.");
+        else if (colorId !== undefined)
+            url_ += "colorId=" + encodeURIComponent("" + colorId) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetAllProductsByColor(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetAllProductsByColor(<any>response_);
+                } catch (e) {
+                    return <Observable<ProductDto[]>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<ProductDto[]>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetAllProductsByColor(response: HttpResponseBase): Observable<ProductDto[]> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -4952,17 +5133,18 @@ export interface IChangeUiThemeInput {
 }
 
 export class FavoriteDto implements IFavoriteDto {
-    quantity: number;
-    tenantId: number;
     name: string | undefined;
     description: string | undefined;
     imageUrl: string | undefined;
     price: number;
     shipmentPrice: number;
+    productTypeId: number;
     productTypeFk: ProductTypeDto;
+    productBrandId: number;
     productBrandFk: ProductBrandDto;
+    productColorId: number;
     productColorFk: ProductColorDto;
-    id: number;
+    id: string | undefined;
 
     constructor(data?: IFavoriteDto) {
         if (data) {
@@ -4975,15 +5157,16 @@ export class FavoriteDto implements IFavoriteDto {
 
     init(_data?: any) {
         if (_data) {
-            this.quantity = _data["quantity"];
-            this.tenantId = _data["tenantId"];
             this.name = _data["name"];
             this.description = _data["description"];
             this.imageUrl = _data["imageUrl"];
             this.price = _data["price"];
             this.shipmentPrice = _data["shipmentPrice"];
+            this.productTypeId = _data["productTypeId"];
             this.productTypeFk = _data["productTypeFk"] ? ProductTypeDto.fromJS(_data["productTypeFk"]) : <any>undefined;
+            this.productBrandId = _data["productBrandId"];
             this.productBrandFk = _data["productBrandFk"] ? ProductBrandDto.fromJS(_data["productBrandFk"]) : <any>undefined;
+            this.productColorId = _data["productColorId"];
             this.productColorFk = _data["productColorFk"] ? ProductColorDto.fromJS(_data["productColorFk"]) : <any>undefined;
             this.id = _data["id"];
         }
@@ -4998,15 +5181,16 @@ export class FavoriteDto implements IFavoriteDto {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["quantity"] = this.quantity;
-        data["tenantId"] = this.tenantId;
         data["name"] = this.name;
         data["description"] = this.description;
         data["imageUrl"] = this.imageUrl;
         data["price"] = this.price;
         data["shipmentPrice"] = this.shipmentPrice;
+        data["productTypeId"] = this.productTypeId;
         data["productTypeFk"] = this.productTypeFk ? this.productTypeFk.toJSON() : <any>undefined;
+        data["productBrandId"] = this.productBrandId;
         data["productBrandFk"] = this.productBrandFk ? this.productBrandFk.toJSON() : <any>undefined;
+        data["productColorId"] = this.productColorId;
         data["productColorFk"] = this.productColorFk ? this.productColorFk.toJSON() : <any>undefined;
         data["id"] = this.id;
         return data; 
@@ -5021,17 +5205,18 @@ export class FavoriteDto implements IFavoriteDto {
 }
 
 export interface IFavoriteDto {
-    quantity: number;
-    tenantId: number;
     name: string | undefined;
     description: string | undefined;
     imageUrl: string | undefined;
     price: number;
     shipmentPrice: number;
+    productTypeId: number;
     productTypeFk: ProductTypeDto;
+    productBrandId: number;
     productBrandFk: ProductBrandDto;
+    productColorId: number;
     productColorFk: ProductColorDto;
-    id: number;
+    id: string | undefined;
 }
 
 export class FavoriteDtoPagedResultDto implements IFavoriteDtoPagedResultDto {
