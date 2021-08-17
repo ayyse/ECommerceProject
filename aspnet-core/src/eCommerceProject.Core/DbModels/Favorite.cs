@@ -1,17 +1,20 @@
 ﻿using Abp.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace eCommerceProject.DbModels
 {
-    public class Favorite : Entity<int>, IMustHaveTenant
+    public class Favorite : Entity<int>, IMayHaveTenant
     {
-        public int Quantity { get; set; }
+        public int? TenantId { get; set; }
 
-        public int TenantId { get; set; }
+        public int ProductTypeId { get; set; }
+        public ProductType ProductTypeFk { get; set; }
+
+
+        public int ProductBrandId { get; set; }
+        public ProductBrand ProductBrandFk { get; set; }
+
+        public int ProductColorId { get; set; }
+        public ProductColor ProductColorFk { get; set; }
 
 
         public string Name { get; set; }
@@ -19,8 +22,5 @@ namespace eCommerceProject.DbModels
         public string ImageUrl { get; set; }
         public decimal Price { get; set; }
         public decimal ShipmentPrice { get; set; }
-        public string Brand { get; set; }
-        public string Type { get; set; }
-        public string Color { get; set; }
     }
 }

@@ -10,7 +10,7 @@ using eCommerceProject.EntityFrameworkCore;
 namespace eCommerceProject.Migrations
 {
     [DbContext(typeof(eCommerceProjectDbContext))]
-    [Migration("20210728140822_Added_Favorite_Table")]
+    [Migration("20210817103551_Added_Favorite_Table")]
     partial class Added_Favorite_Table
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -1529,18 +1529,10 @@ namespace eCommerceProject.Migrations
                     b.ToTable("AbpUsers");
                 });
 
-            modelBuilder.Entity("eCommerceProject.DbModels.Favorite", b =>
+            modelBuilder.Entity("eCommerceProject.DbModels.BasketItem", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("Brand")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Color")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -1554,19 +1546,76 @@ namespace eCommerceProject.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int>("ProductBrandId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductColorId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductTypeId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
                     b.Property<decimal>("ShipmentPrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("TenantId")
+                    b.Property<int?>("TenantId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Type")
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductBrandId");
+
+                    b.HasIndex("ProductColorId");
+
+                    b.HasIndex("ProductTypeId");
+
+                    b.ToTable("BasketItems");
+                });
+
+            modelBuilder.Entity("eCommerceProject.DbModels.Favorite", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("ProductBrandId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductColorId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("ShipmentPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("TenantId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ProductBrandId");
+
+                    b.HasIndex("ProductColorId");
+
+                    b.HasIndex("ProductTypeId");
 
                     b.ToTable("Favorites");
                 });
@@ -1593,7 +1642,7 @@ namespace eCommerceProject.Migrations
                     b.Property<int>("ProductBrandId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ProductColorId")
+                    b.Property<int>("ProductColorId")
                         .HasColumnType("int");
 
                     b.Property<int>("ProductTypeId")
@@ -1948,6 +1997,60 @@ namespace eCommerceProject.Migrations
                     b.Navigation("LastModifierUser");
                 });
 
+            modelBuilder.Entity("eCommerceProject.DbModels.BasketItem", b =>
+                {
+                    b.HasOne("eCommerceProject.DbModels.ProductBrand", "ProductBrandFk")
+                        .WithMany()
+                        .HasForeignKey("ProductBrandId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("eCommerceProject.DbModels.ProductColor", "ProductColorFk")
+                        .WithMany()
+                        .HasForeignKey("ProductColorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("eCommerceProject.DbModels.ProductType", "ProductTypeFk")
+                        .WithMany()
+                        .HasForeignKey("ProductTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ProductBrandFk");
+
+                    b.Navigation("ProductColorFk");
+
+                    b.Navigation("ProductTypeFk");
+                });
+
+            modelBuilder.Entity("eCommerceProject.DbModels.Favorite", b =>
+                {
+                    b.HasOne("eCommerceProject.DbModels.ProductBrand", "ProductBrandFk")
+                        .WithMany()
+                        .HasForeignKey("ProductBrandId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("eCommerceProject.DbModels.ProductColor", "ProductColorFk")
+                        .WithMany()
+                        .HasForeignKey("ProductColorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("eCommerceProject.DbModels.ProductType", "ProductTypeFk")
+                        .WithMany()
+                        .HasForeignKey("ProductTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ProductBrandFk");
+
+                    b.Navigation("ProductColorFk");
+
+                    b.Navigation("ProductTypeFk");
+                });
+
             modelBuilder.Entity("eCommerceProject.DbModels.Product", b =>
                 {
                     b.HasOne("eCommerceProject.DbModels.ProductBrand", "ProductBrandFk")
@@ -1958,7 +2061,9 @@ namespace eCommerceProject.Migrations
 
                     b.HasOne("eCommerceProject.DbModels.ProductColor", "ProductColorFk")
                         .WithMany()
-                        .HasForeignKey("ProductColorId");
+                        .HasForeignKey("ProductColorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("eCommerceProject.DbModels.ProductType", "ProductTypeFk")
                         .WithMany("Products")
