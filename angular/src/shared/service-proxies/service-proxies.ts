@@ -155,9 +155,11 @@ export class BasketItemServiceProxy {
      * @param id (optional) 
      * @return Success
      */
-    getItem(id: string | null | undefined): Observable<BasketItemDto[]> {
+    getItem(id: number | undefined): Observable<BasketItemDto[]> {
         let url_ = this.baseUrl + "/api/services/app/BasketItem/GetItem?";
-        if (id !== undefined && id !== null)
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
             url_ += "id=" + encodeURIComponent("" + id) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -216,9 +218,11 @@ export class BasketItemServiceProxy {
      * @param id (optional) 
      * @return Success
      */
-    getFromDatabase(id: string | null | undefined): Observable<BasketItemDto> {
+    getFromDatabase(id: number | undefined): Observable<BasketItemDto> {
         let url_ = this.baseUrl + "/api/services/app/BasketItem/GetFromDatabase?";
-        if (id !== undefined && id !== null)
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
             url_ += "id=" + encodeURIComponent("" + id) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -382,9 +386,11 @@ export class BasketItemServiceProxy {
      * @param id (optional) 
      * @return Success
      */
-    get(id: string | null | undefined): Observable<BasketItemDto> {
+    get(id: number | undefined): Observable<BasketItemDto> {
         let url_ = this.baseUrl + "/api/services/app/BasketItem/Get?";
-        if (id !== undefined && id !== null)
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
             url_ += "Id=" + encodeURIComponent("" + id) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -612,9 +618,11 @@ export class BasketItemServiceProxy {
      * @param id (optional) 
      * @return Success
      */
-    delete(id: string | null | undefined): Observable<void> {
+    delete(id: number | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/BasketItem/Delete?";
-        if (id !== undefined && id !== null)
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
             url_ += "Id=" + encodeURIComponent("" + id) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -857,9 +865,11 @@ export class FavoriteServiceProxy {
      * @param favId (optional) 
      * @return Success
      */
-    getFavorite(favId: string | null | undefined): Observable<FavoriteDto> {
+    getFavorite(favId: number | undefined): Observable<FavoriteDto> {
         let url_ = this.baseUrl + "/api/services/app/Favorite/GetFavorite?";
-        if (favId !== undefined && favId !== null)
+        if (favId === null)
+            throw new Error("The parameter 'favId' cannot be null.");
+        else if (favId !== undefined)
             url_ += "favId=" + encodeURIComponent("" + favId) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -911,9 +921,11 @@ export class FavoriteServiceProxy {
      * @param id (optional) 
      * @return Success
      */
-    get(id: string | null | undefined): Observable<FavoriteDto> {
+    get(id: number | undefined): Observable<FavoriteDto> {
         let url_ = this.baseUrl + "/api/services/app/Favorite/Get?";
-        if (id !== undefined && id !== null)
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
             url_ += "Id=" + encodeURIComponent("" + id) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -1141,9 +1153,11 @@ export class FavoriteServiceProxy {
      * @param id (optional) 
      * @return Success
      */
-    delete(id: string | null | undefined): Observable<void> {
+    delete(id: number | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Favorite/Delete?";
-        if (id !== undefined && id !== null)
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
             url_ += "Id=" + encodeURIComponent("" + id) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -4956,7 +4970,7 @@ export class BasketItemDto implements IBasketItemDto {
     productBrandFk: ProductBrandDto;
     productColorId: number;
     productColorFk: ProductColorDto;
-    id: string | undefined;
+    id: number;
 
     constructor(data?: IBasketItemDto) {
         if (data) {
@@ -5031,7 +5045,7 @@ export interface IBasketItemDto {
     productBrandFk: ProductBrandDto;
     productColorId: number;
     productColorFk: ProductColorDto;
-    id: string | undefined;
+    id: number;
 }
 
 export class BasketItemDtoPagedResultDto implements IBasketItemDtoPagedResultDto {
@@ -5144,7 +5158,7 @@ export class FavoriteDto implements IFavoriteDto {
     productBrandFk: ProductBrandDto;
     productColorId: number;
     productColorFk: ProductColorDto;
-    id: string | undefined;
+    id: number;
 
     constructor(data?: IFavoriteDto) {
         if (data) {
@@ -5216,7 +5230,7 @@ export interface IFavoriteDto {
     productBrandFk: ProductBrandDto;
     productColorId: number;
     productColorFk: ProductColorDto;
-    id: string | undefined;
+    id: number;
 }
 
 export class FavoriteDtoPagedResultDto implements IFavoriteDtoPagedResultDto {

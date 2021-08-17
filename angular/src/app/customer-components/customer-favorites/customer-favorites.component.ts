@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CustomerFavoritesComponent implements OnInit {
 
-  favId: string
+  favId: number
   fav: FavoriteDto = new FavoriteDto()
   favorites: FavoriteDto[] = []
 
