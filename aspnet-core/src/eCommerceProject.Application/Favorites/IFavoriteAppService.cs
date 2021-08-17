@@ -10,6 +10,7 @@ namespace eCommerceProject.Favorites
 {
     public interface IFavoriteAppService : IAsyncCrudAppService<FavoriteDto, int>
     {
-        public Task<List<FavoriteDto>> GetAllProductsAsync();
+        public Task<List<FavoriteDto>> GetAllFavoritesAsync();
+        public Task<FavoriteDto> AddFavoriteAsync(FavoriteDto input, int id);
     }
 }
